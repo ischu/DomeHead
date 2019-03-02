@@ -13,13 +13,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 // Handlebars
-app.engine(
-  "handlebars",
-  exphbs({
-    defaultLayout: "main"
-  })
-);
-app.set("view engine", "handlebars");
+app.set("view engine", "pug");
 
 // Routes
 require("./routes/apiRoutes")(app);
