@@ -24,7 +24,16 @@ module.exports = function(sequelize, DataTypes) {
         len: [1]
       }
     }
-    // add author_id
   });
+  // NYI
+  // Story.associate = function(models) {
+  //   // Stories belong to Authors
+  //   Story.belongsTo(models.Author, {
+  //     foreignKey: {
+  //       allowNull: false
+  //     }
+  //   });
+  // };
+
   return Story;
 };
