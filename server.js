@@ -17,8 +17,12 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 // Routes
+<<<<<<< HEAD
 require("./routes/author-api-routes")(app);
 require("./routes/story-api-routes")(app);
+=======
+
+>>>>>>> 9ea36ac832638ada78f42587d307315286aa39f7
 require("./routes/htmlRoutes")(app);
 
 var syncOptions = { force: false };
