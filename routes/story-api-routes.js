@@ -36,23 +36,23 @@ module.exports = function(app) {
   });
 
   // TEST POST
-  app.post("/api/stories", function(req, res) {
-    db.Story.create({
-      title: "test1",
-      body: "test2",
-      genre: "test3",
-      AuthorId: 1
-    }).then(function(dbStory) {
-      res.json(dbStory);
-    });
-  });
-
-  // Story route for saving a new Story
   // app.post("/api/stories", function(req, res) {
-  //   db.Story.create(req.body).then(function(dbStory) {
+  //   db.Story.create({
+  //     title: "test1",
+  //     body: "test2",
+  //     genre: "test3",
+  //     AuthorId: 1
+  //   }).then(function(dbStory) {
   //     res.json(dbStory);
   //   });
   // });
+
+  // Story route for saving a new Story
+  app.post("/api/stories", function(req, res) {
+    db.Story.create(req.body).then(function(dbStory) {
+      res.json(dbStory);
+    });
+  });
 
   // DELETE route for deleting stories
   //   app.delete("/api/stories/:id", function(req, res) {
