@@ -17,7 +17,7 @@ app.set("view engine", "pug");
 app.set("views", path.join(__dirname, "views"));
 
 // Routes
-require("./routes/apiRoutes")(app);
+
 require("./routes/htmlRoutes")(app);
 
 var syncOptions = { force: false };
