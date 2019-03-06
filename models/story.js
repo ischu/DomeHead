@@ -13,6 +13,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       validate: {
         // minimum length 50 characters, maximum length 5000 characters
+        // CHANGED MINIMUM TO 1 FOR TESTING PURPOSES- CHANGE BACK LATER!
         len: [1, 5000]
       }
     },
