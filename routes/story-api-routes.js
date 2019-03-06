@@ -37,7 +37,12 @@ module.exports = function(app) {
 
   // TEST POST
   app.post("/api/stories", function(req, res) {
-    db.Story.create({title:"test1", body:"test2", genre:"test3", AuthorId: 1}).then(function(dbStory) {
+    db.Story.create({
+      title: "test1",
+      body: "test2",
+      genre: "test3",
+      AuthorId: 1
+    }).then(function(dbStory) {
       res.json(dbStory);
     });
   });
