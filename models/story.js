@@ -13,7 +13,8 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       validate: {
         // minimum length 50 characters, maximum length 5000 characters
-        len: [50, 5000]
+        // CHANGED MINIMUM TO 1 FOR TESTING PURPOSES- CHANGE BACK LATER!
+        len: [1, 5000]
       }
     },
     genre: {
@@ -25,7 +26,6 @@ module.exports = function(sequelize, DataTypes) {
       }
     }
   });
-  // NYI
   Story.associate = function(models) {
     // Stories belong to Authors
     Story.belongsTo(models.Author, {
