@@ -15,7 +15,8 @@ app.use(express.static("public"));
 app.set("view engine", "pug");
 
 // Routes
-require("./routes/apiRoutes")(app);
+require("./routes/author-api-routes")(app);
+require("./routes/story-api-routes")(app);
 require("./routes/htmlRoutes")(app);
 
 var syncOptions = { force: false };

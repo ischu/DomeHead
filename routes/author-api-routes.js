@@ -26,12 +26,18 @@ module.exports = function(app) {
       res.json(dbAuthor);
     });
   });
-
+// TEST POST
   app.post("/api/authors", function(req, res) {
-    db.Author.create(req.body).then(function(dbAuthor) {
+    db.Author.create({name: "test_name"}).then(function(dbAuthor) {
       res.json(dbAuthor);
     });
   });
+
+  // app.post("/api/authors", function(req, res) {
+  //   db.Author.create(req.body).then(function(dbAuthor) {
+  //     res.json(dbAuthor);
+  //   });
+  // });
 
   //   app.delete("/api/authors/:id", function(req, res) {
   //     db.Author.destroy({
