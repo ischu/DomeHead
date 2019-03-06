@@ -1,5 +1,6 @@
 require("dotenv").config();
 var express = require("express");
+var path = require("path");
 
 var db = require("./models");
 
@@ -13,6 +14,7 @@ app.use(express.static("public"));
 
 // Handlebars
 app.set("view engine", "pug");
+app.set("views", path.join(__dirname, "views"));
 
 // Routes
 require("./routes/author-api-routes")(app);
