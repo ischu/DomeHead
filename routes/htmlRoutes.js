@@ -6,6 +6,17 @@ module.exports = function(app) {
     res.render("index");
   });
 
+  app.get("/create", function(req, res){
+    res.render("create");
+  });
+
+  app.get("/search", function(req, res){
+    res.render("search");
+  });
+
+  app.get("/write", function(req, res){
+    res.render("write");
+  });
   // // Load example page and pass in an example by id
   // app.get("/example/:id", function(req, res) {
   //   db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
