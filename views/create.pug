@@ -3,26 +3,32 @@ extends main.pug
 block create
     .row
         form.col.s12
-            .row
-                .input-field.col.s6
-                    input#first_name.validate(placeholder='Placeholder', type='text')
-                    label(for='first_name') Title
+            #titleDiv
+                .row
+                    .input-field.col.s6
+                        input#title.validate(placeholder='Placeholder', type='text')
+                        label(for='title') Title
+            #genreDiv
+                    .input-field.col.s6
+                        select#genre
+                            option(value='') Genre
+                            option(value='1') Option 1
+                            option(value='2') Option 2
+                            option(value='3') Option 3
+                        label Pick your Genre
 
-                .input-field.col.s6
-                    select
-                        option(value='') Genre
-                        option(value='1') Option 1
-                        option(value='2') Option 2
-                        option(value='3') Option 3
-                    label Pick your Genre
+            #textDiv
+                .row
+                    form.col.s12
+                        .row
+                        .input-field.col.s12
+                            textarea#text.materialize-textarea
+                            label(for='textarea1') Textarea
 
+            button#submit.btn.waves-effect.waves-light(type='submit', name='action')
+                | Submit
+                i.material-icons.right
 
-            .row
-                form.col.s12
-                    .row
-                    .input-field.col.s12
-                        textarea#textarea1.materialize-textarea
-                        label(for='textarea1') Textarea
 
   
     
