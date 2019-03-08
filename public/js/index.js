@@ -4,6 +4,8 @@ var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
+console.log("js is working");
+
 // The API object contains methods for each kind of request we'll make
 var API = {
   saveExample: function(example) {
@@ -97,3 +99,8 @@ var handleDeleteBtnClick = function() {
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
 $exampleList.on("click", ".delete", handleDeleteBtnClick);
+
+
+$(document).ready(function() {
+    $('select').formSelect();
+});
