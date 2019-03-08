@@ -3,7 +3,9 @@
 // Dependencies
 // =============================================================
 
-var db = require("../models");
+const db = require("../models");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 // Routes
 // =============================================================
@@ -31,6 +33,27 @@ module.exports = function(app) {
       include: [db.Author]
     }).then(function(dbStory) {
       console.log(dbStory);
+      res.json(dbStory);
+    });
+  });
+
+  // Get route for searching Stories by title
+  app.get("/api/stories/", function(req, res) {
+    if (req.query.title) {
+      var query = {
+        title: {
+          // finds titles containing parameter (case sensitve)
+          [Op.like]: "%" + req.query.body + "%"
+        }
+      };
+    }
+    if (req.query.author_id) {
+      query.AuthorId = req.query.author_id;
+    }
+    db.Story.findAll({
+      where: query,
+      include: [db.Author]
+    }).then(function(dbStory) {
       res.json(dbStory);
     });
   });
