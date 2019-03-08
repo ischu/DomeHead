@@ -11,18 +11,18 @@ const Op = Sequelize.Op;
 // =============================================================
 module.exports = function(app) {
   // GET route for getting all of the stories
-  app.get("/api/stories", function(req, res) {
-    var query = {};
-    if (req.query.author_id) {
-      query.AuthorId = req.query.author_id;
-    }
-    db.Story.findAll({
-      where: query,
-      include: [db.Author]
-    }).then(function(dbStory) {
-      res.json(dbStory);
-    });
-  });
+  // app.get("/api/stories", function(req, res) {
+  //   var query = {};
+  //   if (req.query.author_id) {
+  //     query.AuthorId = req.query.author_id;
+  //   }
+  //   db.Story.findAll({
+  //     where: query,
+  //     include: [db.Author]
+  //   }).then(function(dbStory) {
+  //     res.json(dbStory);
+  //   });
+  // });
 
   // Get route for retrieving a single Story by id
   app.get("/api/stories/:id", function(req, res) {
@@ -37,15 +37,16 @@ module.exports = function(app) {
     });
   });
 
-  // Get route for searching Stories by title
-  app.get("/api/stories/", function(req, res) {
+  // GET story by query
+  app.get("/api/stories", function(req, res) {
+    let query = {};
+    // For searching Stories by title
     if (req.query.title) {
-      var query = {
-        title: {
-          // finds titles containing parameter (case sensitve)
-          [Op.like]: "%" + req.query.body + "%"
-        }
-      };
+      query["title"] =
+        // finds titles containing parameter (case sensitve)
+        {
+          [Op.like]: "%" + req.query.title + "%"
+        };
     }
     if (req.query.author_id) {
       query.AuthorId = req.query.author_id;
