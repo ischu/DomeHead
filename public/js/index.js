@@ -1,32 +1,52 @@
 // Get references to page elements
 var $exampleText = $("#example-text");
-var $exampleDescription = $("#example-description");
+var $exampleAuthor = $("#example-description");
+var $exampleGenre = $("example-Genre")
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
 console.log("js is working");
 
-// The API object contains methods for each kind of request we'll make
-var API = {
+// The STORY object contains methods for each kind of request we'll make
+var AUTHOR = {
   saveExample: function(example) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
+      url: "api/authors",
+      data: JSON.stringify(example)
+    })
+  },
+  getExamples: function() {
+    return $.ajax({
+      url: "api/authors",
+      type: GET
+    })
+  }
+}
+
+var STORY = {
+  saveExample: function(example) {
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      url: "api/stories",
       data: JSON.stringify(example)
     });
   },
   getExamples: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/stories",
       type: "GET"
     });
   },
   deleteExample: function(id) {
     return $.ajax({
-      url: "api/examples/" + id,
+      url: "api/stories" + id,
       type: "DELETE"
     });
   }
@@ -34,7 +54,7 @@ var API = {
 
 // refreshExamples gets new examples from the db and repopulates the list
 var refreshExamples = function() {
-  API.getExamples().then(function(data) {
+  STORY.getExamples().then(function(data) {
     var $examples = data.map(function(example) {
       var $a = $("<a>")
         .text(example.text)
@@ -61,28 +81,55 @@ var refreshExamples = function() {
   });
 };
 
-// handleFormSubmit is called whenever we submit a new example
+// storySubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-var handleFormSubmit = function(event) {
+var storySubmit = function(event) {
   event.preventDefault();
 
+  // if ($("#title") === "") {
+  //   var enterTitle = $("<div>");
+  //   enterTitle.text("This field is required");
+  //   enterTitle.attr("id", "enterTitle");
+  //   ("#titleDiv").append(enterTitle)
+
+  //   return;
+  // }
+
   var example = {
-    text: $exampleText.val().trim(),
-    description: $exampleDescription.val().trim()
+    title: $("#title").val().trim(),
+    // text: "hello",
+    body: $("#text").val().trim(),
+    genre: $("#genre").val(),
+    // genre: "hello123"
+    //change authorID later
+    AuthorId: 1, //EXAMPLE AUTHOR VARIABLE
   };
 
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
-    return;
-  }
-
-  API.saveExample(example).then(function() {
+  STORY.saveExample(example).then(function() {
+    console.log("saveExampleStory")
     refreshExamples();
   });
 
-  $exampleText.val("");
-  $exampleDescription.val("");
+  // $("#title").val("");
+  // $("#text").val("");
+
 };
+
+var authorSubmit = function(event){
+  event.preventDefault();
+
+console.log("test")
+
+  var example = {
+  name: $("#createAuthor").val().trim()
+  }
+
+  AUTHOR.saveExample(example).then(function() {
+    console.log("saveExampleAuthor");
+  })
+}
+
+
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
@@ -91,16 +138,15 @@ var handleDeleteBtnClick = function() {
     .parent()
     .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
+  STORY.deleteExample(idToDelete).then(function() {
     refreshExamples();
   });
 };
 
 // Add event listeners to the submit and delete buttons
-$submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
-
-
 $(document).ready(function() {
-    $('select').formSelect();
+  $("#submit").on("click", storySubmit);
+  $("#authorSubmit").on("click", authorSubmit);
+  $exampleList.on("click", ".delete", handleDeleteBtnClick);
+  $('select').formSelect();
 });
