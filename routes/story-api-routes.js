@@ -43,7 +43,7 @@ module.exports = function(app) {
     // For searching Stories by title
     if (req.query.title) {
       query["title"] =
-        // finds titles containing parameter (case sensitve)
+        // finds titles containing query (case sensitve)
         {
           [Op.like]: "%" + req.query.title + "%"
         };

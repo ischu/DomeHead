@@ -4,19 +4,15 @@
 // =============================================================
 
 var db = require("../models");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 // Routes
 // =============================================================
 
 module.exports = function(app) {
-  // GET all Authors
-  app.get("/api/authors", function(req, res) {
-    db.Author.findAll({}).then(function(dbAuthor) {
-      res.json(dbAuthor);
-    });
-  });
-
   // GET single Author by id
+
   app.get("/api/authors/:id", function(req, res) {
     db.Author.findOne({
       where: {
@@ -27,17 +23,22 @@ module.exports = function(app) {
     });
   });
 
-  // search authors by name
-  app.get("/api/authors/:name", function(req, res) {
-    db.Story.findAll({
-      where: {
-        name: {
-          // finds titles containing parameter (case sensitve)
-          [Op.like]: `%${req.params.name}%`
-        }
-      }
-    }).then(function(dbStory) {
-      res.json(dbStory);
+  // GET author by name- empty search will return all authors
+
+  app.get("/api/authors", function(req, res) {
+    let query = {};
+    // For searching authors by name
+    if (req.query.name) {
+      query["name"] =
+        // finds names containing query (case sensitve)
+        {
+          [Op.like]: "%" + req.query.name + "%"
+        };
+    }
+    db.Author.findAll({
+      where: query
+    }).then(function(dbAuthor) {
+      res.json(dbAuthor);
     });
   });
 
