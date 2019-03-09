@@ -44,7 +44,7 @@ module.exports = function(app) {
     }
     db.Story.findAll({
       where: query,
-      include: [{model: db.Author, as: "author"}]
+      include: [db.Author]
     }).then(function(dbStory) {
       res.json(dbStory);
     });
