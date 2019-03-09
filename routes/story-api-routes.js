@@ -3,24 +3,26 @@
 // Dependencies
 // =============================================================
 
-var db = require("../models");
+const db = require("../models");
+const Sequelize = require("sequelize");
+const Op = Sequelize.Op;
 
 // Routes
 // =============================================================
 module.exports = function(app) {
   // GET route for getting all of the stories
-  app.get("/api/stories", function(req, res) {
-    var query = {};
-    if (req.query.author_id) {
-      query.AuthorId = req.query.author_id;
-    }
-    db.Story.findAll({
-      where: query,
-      include: [db.Author]
-    }).then(function(dbStory) {
-      res.json(dbStory);
-    });
-  });
+  // app.get("/api/stories", function(req, res) {
+  //   var query = {};
+  //   if (req.query.author_id) {
+  //     query.AuthorId = req.query.author_id;
+  //   }
+  //   db.Story.findAll({
+  //     where: query,
+  //     include: [db.Author]
+  //   }).then(function(dbStory) {
+  //     res.json(dbStory);
+  //   });
+  // });
 
   // Get route for retrieving a single Story by id
   app.get("/api/stories/:id", function(req, res) {
@@ -31,6 +33,28 @@ module.exports = function(app) {
       include: [db.Author]
     }).then(function(dbStory) {
       console.log(dbStory);
+      res.json(dbStory);
+    });
+  });
+
+  // GET story by query
+  app.get("/api/stories", function(req, res) {
+    let query = {};
+    // For searching Stories by title
+    if (req.query.title) {
+      query["title"] =
+        // finds titles containing query (case sensitve)
+        {
+          [Op.like]: "%" + req.query.title + "%"
+        };
+    }
+    if (req.query.author_id) {
+      query.AuthorId = req.query.author_id;
+    }
+    db.Story.findAll({
+      where: query,
+      include: [db.Author]
+    }).then(function(dbStory) {
       res.json(dbStory);
     });
   });
