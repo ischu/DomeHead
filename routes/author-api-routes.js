@@ -11,12 +11,12 @@ const Op = Sequelize.Op;
 // =============================================================
 
 module.exports = function(app) {
-  // GET single Author by id
+  // GET single Author by name
 
-  app.get("/api/authors/:id", function(req, res) {
+  app.get("/api/authors/:name", function(req, res) {
     db.Author.findOne({
       where: {
-        id: req.params.id
+        name: req.params.name
       }
     }).then(function(dbAuthor) {
       res.json(dbAuthor);
