@@ -5,7 +5,9 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       validate: {
         // titles must be between 5 and 45 characters long
-        len: [5, 45]
+        len: [5, 45],
+        // titles can only include letters, numbers and spaces
+        is: /[\w- ]/g
       }
     },
     body: {
