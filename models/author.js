@@ -5,7 +5,9 @@ module.exports = function(sequelize, DataTypes) {
       type: DataTypes.STRING,
       allowNull: false,
       validate: {
-        len: [5, 40]
+        len: [5, 40],
+        // author names can include alphanumeric or underscore only
+        is: /[\w]/g
       }
     }
   });
