@@ -12,9 +12,8 @@ h1 {
   padding: 0
 }
 
-#nav{
+.nav-wrapper{
   margin:0;
-  color:blue;
 }
 
 .body{
@@ -29,4 +28,24 @@ h1 {
 .row{
   margin:0;
   padding:0;
+}
+
+#titleGenreRow{
+  margin:20px;
+}
+
+#storyRow{
+  margin:20px;
+}
+
+#submit{
+  margin-left: 40px;
+}
+
+#authorRow{
+  margin:20px;
+}
+
+#authorSubmit{
+  margin-left:30px;
 }
