@@ -7,11 +7,6 @@ var $exampleList = $("#example-list");
 
 console.log("js is working");
 
-$(document).ready(function() {
-  $("#modal1").modal();
-  $("#modal1").modal("open");
-});
-
 // The STORY object contains methods for each kind of request we'll make
 var AUTHOR = {
   saveExample: function(example) {
@@ -150,6 +145,8 @@ var handleDeleteBtnClick = function() {
 
 // Add event listeners to the submit and delete buttons
 $(document).ready(function() {
+  $("#modal1").modal();
+  $("#modal1").modal("open");
   $("#submit").on("click", storySubmit);
   $("#authorSubmit").on("click", authorSubmit);
   $exampleList.on("click", ".delete", handleDeleteBtnClick);
