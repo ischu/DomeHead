@@ -42,12 +42,30 @@ module.exports = function(app) {
     });
   });
 
-  // TEST POST
-  // app.post("/api/authors", function(req, res) {
-  //   db.Author.create({name: "test_name"}).then(function(dbAuthor) {
-  //     res.json(dbAuthor);
-  //   });
-  // });
+  // GET authors and their stories
+
+  app.get("/api/authorsWork", function(req, res) {
+    let query = {};
+    // For searching authors by name
+    if (req.query.name) {
+      query["name"] =
+        // finds names containing query (case sensitve)
+        {
+          [Op.like]: "%" + req.query.name + "%"
+        };
+    }
+    db.Author.findAll({
+      where: query,
+      include: [
+        {
+          model: db.Story,
+          as: "stories"
+        }
+      ]
+    }).then(function(dbAuthor) {
+      res.json(dbAuthor);
+    });
+  });
 
   app.post("/api/authors", function(req, res) {
     db.Author.create(req.body).then(function(dbAuthor) {

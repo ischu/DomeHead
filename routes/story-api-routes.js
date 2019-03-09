@@ -10,20 +10,6 @@ const Op = Sequelize.Op;
 // Routes
 // =============================================================
 module.exports = function(app) {
-  // GET route for getting all of the stories
-  // app.get("/api/stories", function(req, res) {
-  //   var query = {};
-  //   if (req.query.author_id) {
-  //     query.AuthorId = req.query.author_id;
-  //   }
-  //   db.Story.findAll({
-  //     where: query,
-  //     include: [db.Author]
-  //   }).then(function(dbStory) {
-  //     res.json(dbStory);
-  //   });
-  // });
-
   // Get route for retrieving a single Story by id
   app.get("/api/stories/:id", function(req, res) {
     db.Story.findOne({
@@ -32,24 +18,29 @@ module.exports = function(app) {
       },
       include: [db.Author]
     }).then(function(dbStory) {
-      console.log(dbStory);
       res.json(dbStory);
     });
   });
 
-  // GET story by query
+  // GET story by query - empty query will return all stories
   app.get("/api/stories", function(req, res) {
     let query = {};
-    // For searching Stories by title
+    // Search stories by title
     if (req.query.title) {
       query["title"] =
-        // finds titles containing query (case sensitve)
+        // returns partial matches (case sensitve)
         {
           [Op.like]: "%" + req.query.title + "%"
         };
     }
-    if (req.query.author_id) {
-      query.AuthorId = req.query.author_id;
+    // Search stories by author id
+    if (req.query.AuthorId) {
+      query.AuthorId = req.query.AuthorId;
+    }
+    // Search by genre
+    if (req.query.genre) {
+      // is exact since genres from a set list
+      query["genre"] = req.query.genre;
     }
     db.Story.findAll({
       where: query,
@@ -59,19 +50,7 @@ module.exports = function(app) {
     });
   });
 
-  // TEST POST
-  // app.post("/api/stories", function(req, res) {
-  //   db.Story.create({
-  //     title: "test1",
-  //     body: "test2",
-  //     genre: "test3",
-  //     AuthorId: 1
-  //   }).then(function(dbStory) {
-  //     res.json(dbStory);
-  //   });
-  // });
-
-  // Story route for saving a new Story
+  // POST route for saving a new Story
   app.post("/api/stories", function(req, res) {
     db.Story.create(req.body).then(function(dbStory) {
       res.json(dbStory);
@@ -79,15 +58,16 @@ module.exports = function(app) {
   });
 
   // DELETE route for deleting stories
-  //   app.delete("/api/stories/:id", function(req, res) {
-  //     db.Story.destroy({
-  //       where: {
-  //         id: req.params.id
-  //       }
-  //     }).then(function(dbStory) {
-  //       res.json(dbStory);
-  //     });
-  //   });
+  app.delete("/api/stories/:id", function(req, res) {
+    db.Story.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbStory) {
+      console.log("Story with id " + req.params.id + " destroyed");
+      res.json(dbStory);
+    });
+  });
 
   // PUT route for updating stories
   //   app.put("/api/stories", function(req, res) {
