@@ -12,7 +12,7 @@ module.exports = function(sequelize, DataTypes) {
 
   Author.associate = function(models) {
     Author.hasMany(models.Story, {
-      as: "author",
+      as: "stories",
       onDelete: "cascade"
     });
   };

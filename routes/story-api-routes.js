@@ -18,12 +18,11 @@ module.exports = function(app) {
       },
       include: [db.Author]
     }).then(function(dbStory) {
-      console.log(dbStory);
       res.json(dbStory);
     });
   });
 
-  // GET story by query empty query will return all stories
+  // GET story by query - empty query will return all stories
   app.get("/api/stories", function(req, res) {
     let query = {};
     // Search stories by title
@@ -34,14 +33,10 @@ module.exports = function(app) {
           [Op.like]: "%" + req.query.title + "%"
         };
     }
-    // Search stories by author name
-    // if (req.query.Author.name) {
-    //   query.Author.name =
-    //     // returns partial matches (case sensitve)
-    //     {
-    //       [Op.like]: "%" + req.query.Author.name + "%"
-    //     };
-    // }
+    // Search stories by author id
+    if (req.query.AuthorId) {
+      query.AuthorId = req.query.AuthorId;
+    }
     // Search by genre
     if (req.query.genre) {
       // is exact since genres from a set list
@@ -49,13 +44,13 @@ module.exports = function(app) {
     }
     db.Story.findAll({
       where: query,
-      include: [db.Author]
+      include: [{model: db.Author, as: "author"}]
     }).then(function(dbStory) {
       res.json(dbStory);
     });
   });
 
-  // Story route for saving a new Story
+  // POST route for saving a new Story
   app.post("/api/stories", function(req, res) {
     db.Story.create(req.body).then(function(dbStory) {
       res.json(dbStory);
