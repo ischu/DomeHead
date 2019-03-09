@@ -145,6 +145,8 @@ var handleDeleteBtnClick = function() {
 
 // Add event listeners to the submit and delete buttons
 $(document).ready(function() {
+  $("#modal1").modal();
+  $("#modal1").modal("open");
   $("#submit").on("click", storySubmit);
   $("#authorSubmit").on("click", authorSubmit);
   $exampleList.on("click", ".delete", handleDeleteBtnClick);

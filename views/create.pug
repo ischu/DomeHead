@@ -1,6 +1,12 @@
 extends main.pug
 
 block create
+    #modal1.modal
+        .modal-content
+            a#authorDrop.dropdown-trigger.btn(href='#', data-target='dropdown1') Drop Me!
+            p New here? Click the "Newbie" button to follow the link to our author page!
+        .modal-footer 
+            a#authorPage.modal-close.waves-effect.waves-green.btn-flat(href='author') Newbie
     .row
         form.col.s12
             #titleGenreDiv
@@ -28,7 +34,3 @@ block create
             button#submit.btn.waves-effect.waves-light(type='submit', name='action')
                 | Submit
                 i.material-icons.right
-
-
-  
-    
