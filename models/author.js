@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
         // author names must be between 4 and
         len: [3, 20],
         // author names can include alphanumeric or underscore only
-        is: /[\w]/g
+        is: /^[\w]+$/
       }
     }
   });
