@@ -34,14 +34,14 @@ module.exports = function(app) {
           [Op.like]: "%" + req.query.title + "%"
         };
     }
-    // Search stories by author
-    if (req.query.author_id) {
-      query["author"] =
-        // returns partial matches (case sensitve)
-        {
-          [Op.like]: "%" + req.query.title + "%"
-        };
-    }
+    // Search stories by author name
+    // if (req.query.Author.name) {
+    //   query.Author.name =
+    //     // returns partial matches (case sensitve)
+    //     {
+    //       [Op.like]: "%" + req.query.Author.name + "%"
+    //     };
+    // }
     // Search by genre
     if (req.query.genre) {
       // is exact since genres from a set list
@@ -63,15 +63,16 @@ module.exports = function(app) {
   });
 
   // DELETE route for deleting stories
-  //   app.delete("/api/stories/:id", function(req, res) {
-  //     db.Story.destroy({
-  //       where: {
-  //         id: req.params.id
-  //       }
-  //     }).then(function(dbStory) {
-  //       res.json(dbStory);
-  //     });
-  //   });
+  app.delete("/api/stories/:id", function(req, res) {
+    db.Story.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbStory) {
+      console.log("Story with id " + req.params.id + " destroyed");
+      res.json(dbStory);
+    });
+  });
 
   // PUT route for updating stories
   //   app.put("/api/stories", function(req, res) {
