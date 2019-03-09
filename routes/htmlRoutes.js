@@ -11,9 +11,12 @@ module.exports = function(app) {
   });
 
   app.get("/stories", function(req, res){
-      db.Story.findAll({}).then(function(dbExample) {
+      db.Story.findAll({
+        include: [db.Author]
+      }).then(function(dbExample) {
+        console.log(dbExample[0].Author.name);
         res.render("stories", {
-          Story: dbExample
+         stories: dbExample         
         });
       });
   });
@@ -21,7 +24,7 @@ module.exports = function(app) {
   app.get("/write", function(req, res){
     db.Story.findOne({}).then(function(dbExample){
       res.render("write", {
-        Story: dbExample
+        write: dbExample
       })
     })
   });
