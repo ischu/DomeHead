@@ -1,6 +1,16 @@
 extends main.pug
 
 block create
+    #modal1.modal
+        .modal-content
+            .row
+                form.col.s12
+                    .row
+                        .input-field.col.s6
+                            input#author_name.validate(placeholder='Name', type='text')
+                            label(for='author_name') Author Name
+        .modal-footer
+            a.modal-close.waves-effect.waves-green.btn-flat(href='#!') Submit
     .row
         form.col.s12
             #titleGenreDiv

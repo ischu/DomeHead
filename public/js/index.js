@@ -7,6 +7,11 @@ var $exampleList = $("#example-list");
 
 console.log("js is working");
 
+$(document).ready(function() {
+  $("#modal1").modal();
+  $("#modal1").modal("open");
+});
+
 // The STORY object contains methods for each kind of request we'll make
 var AUTHOR = {
   saveExample: function(example) {
