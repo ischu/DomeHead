@@ -13,16 +13,14 @@ html(lang="en")
     body
         block body
             .row
-                .col.s12.m6
+                .col.s12.m12#colOne
                     .card.blue-grey.darken-1
                         .card-content.white-text
-                            span.card-title Card Title
+                            span.card-title Words. Words. Words.
                             p
-                            | I am a very simple card. I am good at containing small bits of information.
+                            | Words. Words. Words
                             | I am convenient because I require little markup to use effectively.
-                        .card-action
-                            a(href='#') This is a link
-                            a(href='#') This is a link
+                        
             nav
                 .nav-wrapper
                     ul#nav-mobile.left.hide-on-med-and-down
@@ -31,9 +29,11 @@ html(lang="en")
                         li
                             a(href="create") Create
                         li
-                            a(href="write") Write
+                            a(href="stories") Stories
                         li
-                            a(href="search") Search
+                            a(href="author") Authors
+                        li 
+                            a(href="write") Play
         block create
         block search
         block write

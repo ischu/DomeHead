@@ -110,8 +110,8 @@ var storySubmit = function(event) {
     refreshExamples();
   });
 
-  // $("#title").val("");
-  // $("#text").val("");
+  $("#title").val("");
+  $("#text").val("");
 
 };
 

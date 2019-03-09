@@ -5,3 +5,28 @@
 h1 {
   color: blue;
 }
+
+.card{
+  width: 100%;
+  margin:0;
+  padding: 0
+}
+
+#nav{
+  margin:0;
+  color:blue;
+}
+
+.body{
+  margin: 0;
+  padding: 0;
+}
+
+#colOne{
+  padding: 0;
+}
+
+.row{
+  margin:0;
+  padding:0;
+}
