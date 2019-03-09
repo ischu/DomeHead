@@ -13,7 +13,7 @@ module.exports = function(app) {
   app.get("/stories", function(req, res){
       db.Story.findAll({}).then(function(dbExample) {
         res.render("stories", {
-          story: dbExample
+          Story: dbExample
         });
       });
   });
@@ -21,7 +21,7 @@ module.exports = function(app) {
   app.get("/write", function(req, res){
     db.Story.findOne({}).then(function(dbExample){
       res.render("write", {
-        story: dbExample
+        Story: dbExample
       })
     })
   });
@@ -29,7 +29,7 @@ module.exports = function(app) {
   app.get("/author", function(req, res){
       db.Author.findAll({}).then(function(dbExample) {
         res.render("author", {
-          story: dbExample
+          author: dbExample
         });
       });
   });
