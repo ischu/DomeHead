@@ -1,4 +1,4 @@
-// var db = require("../models");
+var db = require("../models");
 
 module.exports = function(app) {
   // Load index page
@@ -11,24 +11,32 @@ module.exports = function(app) {
   });
 
   app.get("/stories", function(req, res){
-    res.render("stories");
+      db.Story.findAll({}).then(function(dbExample) {
+        res.render("stories", {
+          Story: dbExample
+        });
+      });
   });
 
   app.get("/write", function(req, res){
-    res.render("write");
+    db.Story.findOne({}).then(function(dbExample){
+      res.render("write", {
+        Story: dbExample
+      })
+    })
   });
 
   app.get("/author", function(req, res){
-    res.render("author");
+      db.Author.findAll({}).then(function(dbExample) {
+        res.render("author", {
+          author: dbExample
+        });
+      });
   });
-  // // Load example page and pass in an example by id
-  // app.get("/example/:id", function(req, res) {
-  //   db.Example.findOne({ where: { id: req.params.id } }).then(function(dbExample) {
-  //     res.render("example", {
-  //       example: dbExample
-  //     });
-  //   });
-  // });
+
+  
+  // Load example page and pass in an example by id
+  
 
   // Render 404 page for any unmatched routes
   // app.get("*", function(req, res) {
