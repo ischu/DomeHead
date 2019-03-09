@@ -49,3 +49,12 @@ h1 {
 #authorSubmit{
   margin-left:30px;
 }
+
+#storyTitle{
+  color:white;
+}
+
+#storiesList{
+  margin:10px;
+  width:40%;
+}
