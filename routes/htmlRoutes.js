@@ -21,10 +21,14 @@ module.exports = function(app) {
       });
   });
 
-  app.get("/write", function(req, res){
-    db.Story.findOne({}).then(function(dbExample){
+  app.get("/write/:id", function(req, res){
+    db.Story.findOne({
+      where:{
+        id: req.params.id    
+      }
+    }).then(function(dbExample){
       res.render("write", {
-        write: dbExample
+        stories: dbExample
       })
     })
   });
@@ -32,7 +36,7 @@ module.exports = function(app) {
   app.get("/author", function(req, res){
       db.Author.findAll({}).then(function(dbExample) {
         res.render("author", {
-          author: dbExample
+          authors: dbExample
         });
       });
   });
