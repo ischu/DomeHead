@@ -7,6 +7,7 @@ var $exampleList = $("#example-list");
 
 console.log("js is working");
 
+
 // The STORY object contains methods for each kind of request we'll make
 var AUTHOR = {
   saveExample: function(example) {
@@ -86,15 +87,6 @@ var refreshExamples = function() {
 var storySubmit = function(event) {
   event.preventDefault();
 
-  // if ($("#title") === "") {
-  //   var enterTitle = $("<div>");
-  //   enterTitle.text("This field is required");
-  //   enterTitle.attr("id", "enterTitle");
-  //   ("#titleDiv").append(enterTitle)
-
-  //   return;
-  // }
-
   var example = {
     title: $("#title").val().trim(),
     // text: "hello",
@@ -143,6 +135,15 @@ var handleDeleteBtnClick = function() {
   });
 };
 
+//testing js functionality
+var playSubmit = function(event) {
+  
+}
+
+var storyArray = [];
+
+// $("#STORYDATABASETEXT").replace("[label]", "")
+
 // Add event listeners to the submit and delete buttons
 $(document).ready(function() {
   $("#modal1").modal();
@@ -151,15 +152,7 @@ $(document).ready(function() {
   $("#authorSubmit").on("click", authorSubmit);
   $exampleList.on("click", ".delete", handleDeleteBtnClick);
   $('select').formSelect();
+  $("#storyLink").on("click", playSubmit)
 });
 
-// app.get("/api/authors/:id", function(req, res) {
-//   // 2; Add a join to include all of the Author's Stories here
-//   db.Author.findOne({
-//     where: {
-//       id: req.params.id
-//     }
-//   }).then(function(dbAuthor) {
-//     res.json(dbAuthor);
-//   });
-// });
+

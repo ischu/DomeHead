@@ -69,6 +69,8 @@ module.exports = function(app) {
     });
   });
 
+  
+
   // PUT route for updating stories
   //   app.put("/api/stories", function(req, res) {
   //     db.Story.update(
