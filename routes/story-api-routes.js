@@ -45,16 +45,24 @@ module.exports = function(app) {
     db.Story.findAll({
       where: query,
       include: [db.Author]
-    }).then(function(dbStory) {
-      res.json(dbStory);
-    });
+    })
+      .then(function(dbStory) {
+        res.json(dbStory);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   });
 
   // POST route for saving a new Story
   app.post("/api/stories", function(req, res) {
-    db.Story.create(req.body).then(function(dbStory) {
-      res.json(dbStory);
-    });
+    db.Story.create(req.body)
+      .then(function(dbStory) {
+        res.json(dbStory);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   });
 
   // DELETE route for deleting stories

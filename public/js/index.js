@@ -91,7 +91,6 @@ var storySubmit = function(event) {
   //   enterTitle.text("This field is required");
   //   enterTitle.attr("id", "enterTitle");
   //   ("#titleDiv").append(enterTitle)
-
   //   return;
   // }
 
@@ -102,33 +101,31 @@ var storySubmit = function(event) {
     genre: $("#genre").val(),
     // genre: "hello123"
     //change authorID later
-    AuthorId: 1, //EXAMPLE AUTHOR VARIABLE
+    AuthorId: 1 //EXAMPLE AUTHOR VARIABLE
   };
 
   STORY.saveExample(example).then(function() {
-    console.log("saveExampleStory")
+    console.log("saveExampleStory");
     refreshExamples();
   });
 
   $("#title").val("");
   $("#text").val("");
-
 };
 
-var authorSubmit = function(event){
+var authorSubmit = function(event) {
   event.preventDefault();
 
-console.log("test")
+  console.log("test");
 
   var example = {
-  name: $("#createAuthor").val().trim()
-  }
+    name: $("#createAuthor").val().trim()
+  };
 
   AUTHOR.saveExample(example).then(function() {
     console.log("saveExampleAuthor");
   })
 }
-
 
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
