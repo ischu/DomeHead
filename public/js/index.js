@@ -84,49 +84,76 @@ var refreshExamples = function () {
 
 // storySubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
-var storySubmit = function(event) {
+var storySubmit = function (event) {
   event.preventDefault();
 
   let titleVal = $("#title").val().trim();
+  let textVal = $("#text").val().trim();
+  let genreVal = $("#genre").val();
+  // JSON obj to be submitted
+  let example = {
+    title: titleVal,
+    body: textVal,
+    genre: genreVal,
+    AuthorId: 1 //EXAMPLE AUTHOR VARIABLE
+  };
+
+  STORY.saveExample(example).then(function () {
+    console.log("saveExampleStory");
+    refreshExamples();
+  });
+
+  $("#title").val("");
+  $("#text").val("");
+
+};
+
+var storyValidate = function () {
+  let titleVal = $("#title").val().trim();
+  let textVal = $("#text").val().trim();
   let titleRegEx = /\W/g;
   function setHelperText(id, message) {
     $(id).attr("data-error", message);
   }
-  console.log(titleVal, titleRegEx, titleRegEx.test(titleVal));
+  // TITLE VALIDATION
   //If title is incorrect length or has invalid characters, it will not submit
+  // =========================================================================
+
   if (titleVal === "") {
     setHelperText("#titleHelper", "Title cannot be blank");
-    console.log("title", setHelperText);
   } // next two check for valid length
   else if (titleVal.length < 5) {
     setHelperText("#titleHelper", "Title must be longer than 5 characters");
   } else if (titleVal.length > 40) {
     setHelperText("#titleHelper", "Title cannot be longer than 40 characters");
   }
-  // checks for valid characters
+  // checks for invalid characters
   else if (titleRegEx.test(titleVal)) {
     $("#title").addClass("invalid");
     setHelperText("#titleHelper", "Title may only contain letters, numbers, and spaces");
-    // if valid, submit
-  } else {
-    var example = {
-      title: titleVal,
-      // text: "hello",
-      body: $("#text").val().trim(),
-      genre: $("#genre").val(),
-      // genre: "hello123"
-      //change authorID later
-      AuthorId: 1 //EXAMPLE AUTHOR VARIABLE
-    };
 
-    STORY.saveExample(example).then(function () {
-      console.log("saveExampleStory");
-      refreshExamples();
-    });
-
-    $("#title").val("");
-    $("#text").val("");
+  } else{
+    $("#title").removeClass("invalid");
+    $("#title").addClass("valid");
   }
+
+  // STORY VALIDATION
+  // If text is incorrect length, it will not submit
+  // =========================================================================
+
+  // we should probably have a check that there is at least one blank in the story
+
+  if (textVal === "") {
+    setHelperText("#textHelper", "Story cannot be blank");
+    $("#text").addClass("invalid");
+  } else if (textVal.length > 40) {
+    setHelperText("#textHelper", "Story cannot be longer than 5000 characters");
+    $("#text").addClass("invalid");
+  } else{
+    $("#text").removeClass("invalid");
+    $("#text").addClass("valid");
+  }
+
 };
 
 var authorSubmit = function (event) {
@@ -169,9 +196,9 @@ var storyArray = [];
 $(document).ready(function () {
   $("#modal1").modal();
   $("#modal1").modal("open");
+  $(document).on("click", storyValidate);
   $("#submit").on("click", storySubmit);
   $("#authorSubmit").on("click", authorSubmit);
-  $exampleList.on("click", ".delete", handleDeleteBtnClick);
   $('select').formSelect();
   $("#storyLink").on("click", playSubmit)
 });

@@ -8,17 +8,17 @@ block create
         .modal-footer 
             a#authorPage.modal-close.waves-effect.waves-green.btn-flat(href='author') Newbie
     .row
-        form.col.s12(name="titleForm" onsubmit="validateTitleForm()")
+        form.col.s12
             #titleGenreDiv
                 .row#titleGenreRow
                     .input-field.col.m6.s5
                         input#title.validate(placeholder='Placeholder', type='text', minlength="5", maxlength="40", required, aria-required="true")
                         label(for='title') Story Title
-                        span#titleHelper.helper-text(data-error="Required")
+                        span#titleHelper.helper-text(data-error="Every story needs a title!")
 
             
                     .input-field.col.m6.s5
-                        select#genre(required, aria-required="true")
+                        select#genre.validate(required, aria-required="true")
                             option(value='') Genre
                             option(value='Drama') Drama
                             option(value='Comedy') Comedy
@@ -29,10 +29,10 @@ block create
 
             #textDiv
                 .row#storyRow
-                    form.col.s12(onsubmit="validateStoryForm()")
+                    form.col.s12
                         .row
                         .input-field.col.s12
-                            textarea#text.materialize-textarea(data-length="5000", maxlength="5000", required, aria-required="true")
+                            textarea#text.materialize-textarea.validate(data-length="5000", maxlength="5000", required, aria-required="true")
                             label(for='textarea1') Your Story Here
 
 
