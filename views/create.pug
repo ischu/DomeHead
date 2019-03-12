@@ -1,42 +1,45 @@
 extends main.pug
 
 block create
-    #modal1.modal
-        .modal-content
-            a#authorDrop.dropdown-trigger.btn(href='#', data-target='dropdown1') Drop Me!
-            p New here? Click the "Newbie" button to follow the link to our author page!
-        .modal-footer 
-            a#authorPage.modal-close.waves-effect.waves-green.btn-flat(href='author') Newbie
-    .row
-        form#storyForm.col.s12
-            #titleGenreDiv
-                .row#titleGenreRow
-                    .input-field.col.m6.s5
-                        input#title.validate(placeholder='Placeholder', type='text', minlength="5", maxlength="40", required, aria-required="true")
-                        label(for='title') Story Title
-                        span#titleHelper.helper-text(data-error="Every story needs a title!")
+    .container
+        #modal1.modal
+            .modal-content
+                .input-field
+                    input#search(placeholder='Author Name' type='search', required='')
+                    label.label-icon(for='search')
+                p New here? Click the "Newbie" button to follow the link to our author page!
+            .modal-footer 
+                a#authorPage.modal-close.waves-effect.waves-green.btn-flat(href='author') Newbie
+        .row
+            form#storyForm.col.s12
+                #titleGenreDiv
+                    .row#titleGenreRow
+                        .input-field.col.m6.s5
+                            input#title.validate(placeholder='Placeholder', type='text', minlength="5", maxlength="40", required, aria-required="true")
+                            label(for='title') Story Title
+                            span#titleHelper.helper-text(data-error="Every story needs a title!")
 
-            
-                    .input-field.col.m6.s5
-                        select#genre.validate(required, aria-required="true")
-                            option(value=null) Genre
-                            option(value='Drama') Drama
-                            option(value='Comedy') Comedy
-                            option(value='Scary') Scary
-                        label Pick your Genre
-                        span.helper-text(data-error="Don't forget to chose a genre!")
-
-
-            #textDiv
-                .row#storyRow
-                    form.col.s12
-                        .row
-                        .input-field.col.s12
-                            textarea#text.materialize-textarea.validate(data-length="5000", maxlength="5000", required, aria-required="true")
-                            label(for='textarea1') Your Story Here
+                
+                        .input-field.col.m6.s5
+                            select#genre.validate(required, aria-required="true")
+                                option(value=null) Genre
+                                option(value='Drama') Drama
+                                option(value='Comedy') Comedy
+                                option(value='Scary') Scary
+                            label Pick your Genre
+                            span.helper-text(data-error="Don't forget to chose a genre!")
 
 
+                #textDiv
+                    .row#storyRow
+                        form.col.s12
+                            .row
+                            .input-field.col.s12
+                                textarea#text.materialize-textarea.validate(data-length="5000", maxlength="5000", required, aria-required="true")
+                                label(for='textarea1') Your Story Here
 
-            button#submit.btn.waves-effect.waves-light(type='submit', name='action')
-                | Submit
-                i.material-icons.right
+
+
+                button#submit.btn.waves-effect.waves-light(type='submit', name='action')
+                    | Submit
+                    i.material-icons.right
