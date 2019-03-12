@@ -3,34 +3,37 @@ extends main.pug
 block create
     #modal1.modal
         .modal-content
-            a#authorDrop.dropdown-trigger.btn(href='#', data-target='dropdown1') Drop Me!
-            p New here? Click the "Newbie" button to follow the link to our author page!
+            form
+                .input-field
+                    input#author_search(placeholder='Author Name', type='search', required)
+                p Are you new here? Click on the "Newbie" button and you'll be taken to our author page to create your own name!
         .modal-footer 
             a#authorPage.modal-close.waves-effect.waves-green.btn-flat(href='author') Newbie
-    .row
-        form.col.s12
-            #titleGenreDiv
-                .row#titleGenreRow
-                    .input-field.col.m6.s5
-                        input#title.validate(placeholder='Placeholder', type='text')
-                        label(for='title') Story Title
-            
-                    .input-field.col.m6.s5
-                        select#genre
-                            option(value='') Genre
-                            option(value='Drama') Drama
-                            option(value='Comedy') Comedy
-                            option(value='Scary') Scary
-                        label Pick your Genre
+    .container
+        .row
+            form.col.s12
+                #titleGenreDiv
+                    .row#titleGenreRow
+                        .input-field.col.m6.s5
+                            input#title.validate(placeholder='Placeholder', type='text')
+                            label(for='title') Story Title
+                
+                        .input-field.col.m6.s5
+                            select#genre
+                                option(value='') Genre
+                                option(value='Drama') Drama
+                                option(value='Comedy') Comedy
+                                option(value='Scary') Scary
+                            label Pick your Genre
 
-            #textDiv
-                .row#storyRow
-                    form.col.s12
-                        .row
-                        .input-field.col.s12
-                            textarea#text.materialize-textarea
-                            label(for='textarea1') Your Story Here 
+                #textDiv
+                    .row#storyRow
+                        form.col.s12
+                            .row
+                            .input-field.col.s12
+                                textarea#text.materialize-textarea
+                                label(for='textarea1') Your Story Here 
 
-            button#submit.btn.waves-effect.waves-light(type='submit', name='action')
-                | Submit
-                i.material-icons.right
+                button#submit.btn.waves-effect.waves-light(type='submit', name='action')
+                    | Submit
+                    i.material-icons.right

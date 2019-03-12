@@ -1,12 +1,13 @@
 extends main.pug
 
 block create
-    script.
-        var storyBody = "#{stories.body}"
-    script(src="/js/write.js")
-    .row
-        div
-            .row
-                form#storyForm
-                    div#showWrite
+    .container
+        script.
+            var storyBody = "#{stories.body}"
+        script(src="/js/write.js")
+        .row
+            div
+                .row
+                    form#storyForm
+                        div#showWrite
                     
