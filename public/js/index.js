@@ -133,14 +133,16 @@ $("#storyForm").hide();
 }
 
 function hideLogin(){
-
+$("#loginForm").hide();
 }
 
 function hideSignUp(){
-
+$("signUpForm").hide();
 }
 
 hideCreateForm();
+hideSignUp();
+hideLogin();
 
 // Add event listeners to the submit and delete buttons
 $(document).ready(function () {
