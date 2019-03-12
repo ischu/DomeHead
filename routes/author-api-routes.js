@@ -77,6 +77,8 @@ module.exports = function(app) {
       });
   });
 
+  
+
   //   app.delete("/api/authors/:id", function(req, res) {
   //     db.Author.destroy({
   //       where: {
