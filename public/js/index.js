@@ -1,12 +1,3 @@
-// Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleAuthor = $("#example-description");
-var $exampleGenre = $("example-Genre")
-var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
-
-console.log("js is working");
-
 // The STORY object contains methods for each kind of request we'll make
 var AUTHOR = {
   saveExample: function (example) {
@@ -137,9 +128,19 @@ var playSubmit = function (event) {
 
 }
 
-var storyArray = [];
+function hideCreateForm(){
+$("#storyForm").hide();
+}
 
-// $("#STORYDATABASETEXT").replace("[label]", "")
+function hideLogin(){
+
+}
+
+function hideSignUp(){
+
+}
+
+hideCreateForm();
 
 // Add event listeners to the submit and delete buttons
 $(document).ready(function () {
@@ -150,5 +151,6 @@ $(document).ready(function () {
   $('select').formSelect();
   $("#storyLink").on("click", playSubmit)
 });
+
 
 
