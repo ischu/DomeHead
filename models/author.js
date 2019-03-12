@@ -10,6 +10,14 @@ module.exports = function(sequelize, DataTypes) {
         // author names can include alphanumeric or underscore only
         is: /^[\w]+$/
       }
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      validate: {
+        // Length between 7 and 20
+        len: [7-20]
+      }
     }
   });
 
