@@ -9,7 +9,7 @@ function validate() {
   }
 }
 function validateTitleForm() {
-  var x = document.forms["myForm"]["fname"].value;
+  var x = document.forms["titleForm"].value;
   if (x === "") {
     alert("Name must be filled out");
     return false;

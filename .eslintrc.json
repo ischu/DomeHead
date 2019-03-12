@@ -8,10 +8,6 @@
     "parserOptions": {
         "ecmaVersion": 2018
     },
-    "extends": "prettier",
-    "plugins": [
-        "prettier"
-      ],
     "rules": {
         "no-duplicate-case":"error",
         "no-empty":"error",

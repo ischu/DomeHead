@@ -10,7 +10,7 @@ console.log("js is working");
 
 // The STORY object contains methods for each kind of request we'll make
 var AUTHOR = {
-  saveExample: function(example) {
+  saveExample: function (example) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -20,7 +20,7 @@ var AUTHOR = {
       data: JSON.stringify(example)
     })
   },
-  getExamples: function() {
+  getExamples: function () {
     return $.ajax({
       url: "api/authors",
       type: GET
@@ -29,7 +29,7 @@ var AUTHOR = {
 }
 
 var STORY = {
-  saveExample: function(example) {
+  saveExample: function (example) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -39,13 +39,13 @@ var STORY = {
       data: JSON.stringify(example)
     });
   },
-  getExamples: function() {
+  getExamples: function () {
     return $.ajax({
       url: "api/stories",
       type: "GET"
     });
   },
-  deleteExample: function(id) {
+  deleteExample: function (id) {
     return $.ajax({
       url: "api/stories" + id,
       type: "DELETE"
@@ -54,9 +54,9 @@ var STORY = {
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  STORY.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
+var refreshExamples = function () {
+  STORY.getExamples().then(function (data) {
+    var $examples = data.map(function (example) {
       var $a = $("<a>")
         .text(example.text)
         .attr("href", "/example/" + example.id);
@@ -87,26 +87,49 @@ var refreshExamples = function() {
 var storySubmit = function(event) {
   event.preventDefault();
 
-  var example = {
-    title: $("#title").val().trim(),
-    // text: "hello",
-    body: $("#text").val().trim(),
-    genre: $("#genre").val(),
-    // genre: "hello123"
-    //change authorID later
-    AuthorId: 1 //EXAMPLE AUTHOR VARIABLE
-  };
+  let titleVal = $("#title").val().trim();
+  let titleRegEx = /\W/g;
+  function setHelperText(id, message) {
+    $(id).attr("data-error", message);
+  }
+  console.log(titleVal, titleRegEx, titleRegEx.test(titleVal));
+  //If title is incorrect length or has invalid characters, it will not submit
+  if (titleVal === "") {
+    setHelperText("#titleHelper", "Title cannot be blank");
+    console.log("title", setHelperText);
+  } // next two check for valid length
+  else if (titleVal.length < 5) {
+    setHelperText("#titleHelper", "Title must be longer than 5 characters");
+  } else if (titleVal.length > 40) {
+    setHelperText("#titleHelper", "Title cannot be longer than 40 characters");
+  }
+  // checks for valid characters
+  else if (titleRegEx.test(titleVal)) {
+    $("#title").addClass("invalid");
+    setHelperText("#titleHelper", "Title may only contain letters, numbers, and spaces");
+    // if valid, submit
+  } else {
+    var example = {
+      title: titleVal,
+      // text: "hello",
+      body: $("#text").val().trim(),
+      genre: $("#genre").val(),
+      // genre: "hello123"
+      //change authorID later
+      AuthorId: 1 //EXAMPLE AUTHOR VARIABLE
+    };
 
-  STORY.saveExample(example).then(function() {
-    console.log("saveExampleStory");
-    refreshExamples();
-  });
+    STORY.saveExample(example).then(function () {
+      console.log("saveExampleStory");
+      refreshExamples();
+    });
 
-  $("#title").val("");
-  $("#text").val("");
+    $("#title").val("");
+    $("#text").val("");
+  }
 };
 
-var authorSubmit = function(event) {
+var authorSubmit = function (event) {
   event.preventDefault();
 
   console.log("test");
@@ -115,7 +138,7 @@ var authorSubmit = function(event) {
     name: $("#createAuthor").val().trim()
   };
 
-  AUTHOR.saveExample(example).then(function() {
+  AUTHOR.saveExample(example).then(function () {
     console.log("saveExampleAuthor");
   })
 }
@@ -123,19 +146,19 @@ var authorSubmit = function(event) {
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
 // Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function() {
+var handleDeleteBtnClick = function () {
   var idToDelete = $(this)
     .parent()
     .attr("data-id");
 
-  STORY.deleteExample(idToDelete).then(function() {
+  STORY.deleteExample(idToDelete).then(function () {
     refreshExamples();
   });
 };
 
 //testing js functionality
-var playSubmit = function(event) {
-  
+var playSubmit = function (event) {
+
 }
 
 var storyArray = [];
@@ -143,7 +166,7 @@ var storyArray = [];
 // $("#STORYDATABASETEXT").replace("[label]", "")
 
 // Add event listeners to the submit and delete buttons
-$(document).ready(function() {
+$(document).ready(function () {
   $("#modal1").modal();
   $("#modal1").modal("open");
   $("#submit").on("click", storySubmit);

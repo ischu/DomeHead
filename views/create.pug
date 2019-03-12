@@ -8,13 +8,13 @@ block create
         .modal-footer 
             a#authorPage.modal-close.waves-effect.waves-green.btn-flat(href='author') Newbie
     .row
-        form.col.s12(onsubmit="validateTitleForm()")
+        form.col.s12(name="titleForm" onsubmit="validateTitleForm()")
             #titleGenreDiv
                 .row#titleGenreRow
                     .input-field.col.m6.s5
                         input#title.validate(placeholder='Placeholder', type='text', minlength="5", maxlength="40", required, aria-required="true")
                         label(for='title') Story Title
-                        span.helper-text(data-error="Title length must be between 5 and 40 characters and may include only letters, numbers, spaces.")
+                        span#titleHelper.helper-text(data-error="Required")
 
             
                     .input-field.col.m6.s5
