@@ -14,6 +14,8 @@ block create
                     .input-field.col.m6.s5
                         input#title.validate(placeholder='Placeholder', type='text', required)
                         label(for='title') Story Title
+                        span.helper-text(data-error="Title length must be between 5 and 40 characters and may include only letters, numbers, spaces.")
+
             
                     .input-field.col.m6.s5
                         select#genre(required)
@@ -28,8 +30,9 @@ block create
                     form.col.s12
                         .row
                         .input-field.col.s12
-                            textarea#text.materialize-textarea(required)
-                            label(for='textarea1') Your Story Here 
+                            textarea#text.materialize-textarea(data-length=5000, required)
+                            label(for='textarea1') Your Story Here
+
 
             button#submit.btn.waves-effect.waves-light(type='submit', name='action')
                 | Submit
