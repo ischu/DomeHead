@@ -4,6 +4,7 @@ module.exports = function(sequelize, DataTypes) {
     name: {
       type: DataTypes.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         // author names must be between 4 and
         len: [3, 20],
