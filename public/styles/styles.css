@@ -53,3 +53,12 @@ h1 {
 #storyLink{
   color:white;
 }
+
+#newP{
+  font-size: 28px;
+}
+
+#storiesDisplay{
+  margin:15px;
+  width: 40%;
+}
