@@ -2,14 +2,26 @@ extends main.pug
 
 block create
     .container
-        #modal1.modal
-            .modal-content
-                .input-field
-                    input#search(placeholder='Author Name' type='search', required='')
-                    label.label-icon(for='search')
-                p New here? Click the "Newbie" button to follow the link to our author page!
-            .modal-footer 
-                a#authorPage.modal-close.waves-effect.waves-green.btn-flat(href='author') Newbie
+        .row
+            form.col.s6
+                .row
+                    h6 Author Login
+                    .input-field.col.s6
+                        input#loginName.validate(placeholder='Name', type='text')
+                        label(for='login_name') Name
+                    .input-field.col.s6
+                        input#loginPassword.validate(type='text')
+                        label(for='password') Password
+                        a.waves-effect.waves-light.btn-small(id="login-button") Login
+            form.col.s6
+                    h6 New Authors
+                    .input-field.col.s6
+                        input#newName.validate(placeholder='Name', type='text')
+                        label(for='new_name') Name
+                    .input-field.col.s6
+                        input#newPassword.validate(type='text')
+                        label(for='password') Password
+                        a.waves-effect.waves-light.btn-small(id="signin-button") Sign Up
         .row
             form#storyForm.col.s12
                 #titleGenreDiv
