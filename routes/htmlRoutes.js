@@ -1,4 +1,5 @@
 var db = require("../models");
+var Sequelize = require("sequelize")
 
 module.exports = function(app) {
   // Load index page
@@ -41,6 +42,15 @@ module.exports = function(app) {
       });
   });
 
+  app.get("/write", function(req, res){
+    db.Story.findOne({
+      order: Sequelize.literal('rand()'), limit: 1 
+    }).then(function(dbExample){
+      res.render("write", {
+        stories: dbExample
+      })
+    })
+  });
   
   // Load example page and pass in an example by id
   
