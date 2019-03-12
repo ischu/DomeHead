@@ -108,7 +108,7 @@ var storySubmit = function (event) {
 
 };
 
-var storyValidate = function () {
+var titleValidate = function () {
   let titleVal = $("#title").val().trim();
   let textVal = $("#text").val().trim();
   let titleRegEx = /\W/g;
@@ -131,15 +131,21 @@ var storyValidate = function () {
   else if (titleRegEx.test(titleVal)) {
     $("#title").addClass("invalid");
     setHelperText("#titleHelper", "Title may only contain letters, numbers, and spaces");
-
   } else{
     $("#title").removeClass("invalid");
     $("#title").addClass("valid");
   }
 
+};
+
+function textValidate (){
+  let titleVal = $("#title").val().trim();
+  let textVal = $("#text").val().trim();
+  function setHelperText(id, message) {
+    $(id).attr("data-error", message);
+  }
   // STORY VALIDATION
   // If text is incorrect length, it will not submit
-  // =========================================================================
 
   // we should probably have a check that there is at least one blank in the story
 
@@ -153,13 +159,9 @@ var storyValidate = function () {
     $("#text").removeClass("invalid");
     $("#text").addClass("valid");
   }
-
-};
-
+}
 var authorSubmit = function (event) {
   event.preventDefault();
-
-  console.log("test");
 
   var example = {
     name: $("#createAuthor").val().trim()
@@ -167,8 +169,8 @@ var authorSubmit = function (event) {
 
   AUTHOR.saveExample(example).then(function () {
     console.log("saveExampleAuthor");
-  })
-}
+  });
+};
 
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -196,7 +198,8 @@ var storyArray = [];
 $(document).ready(function () {
   $("#modal1").modal();
   $("#modal1").modal("open");
-  $(document).on("click", storyValidate);
+  $(document).on("click", titleValidate);
+  $("#submit").on("click", textValidate);
   $("#submit").on("click", storySubmit);
   $("#authorSubmit").on("click", authorSubmit);
   $('select').formSelect();

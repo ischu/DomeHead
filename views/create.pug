@@ -8,7 +8,7 @@ block create
         .modal-footer 
             a#authorPage.modal-close.waves-effect.waves-green.btn-flat(href='author') Newbie
     .row
-        form.col.s12
+        form#storyForm.col.s12
             #titleGenreDiv
                 .row#titleGenreRow
                     .input-field.col.m6.s5
@@ -34,6 +34,7 @@ block create
                         .input-field.col.s12
                             textarea#text.materialize-textarea.validate(data-length="5000", maxlength="5000", required, aria-required="true")
                             label(for='textarea1') Your Story Here
+
 
 
             button#submit.btn.waves-effect.waves-light(type='submit', name='action')
