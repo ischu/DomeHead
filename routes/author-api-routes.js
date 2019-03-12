@@ -68,12 +68,14 @@ module.exports = function(app) {
   });
 
   app.post("/api/authors", function(req, res) {
-    db.Author.create(req.body).then(function(dbAuthor) {
-      res.json(dbAuthor);
-    });
+    db.Author.create(req.body)
+      .then(function(dbAuthor) {
+        res.json(dbAuthor);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   });
-
-  
 
   //   app.delete("/api/authors/:id", function(req, res) {
   //     db.Author.destroy({
