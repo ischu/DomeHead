@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 const setHelperText = function (id, message) {
-    $(id).attr("data-error", message);
+  $(id).attr("data-error", message);
 };
 
 const validate = {
@@ -10,7 +10,6 @@ const validate = {
     //If title is incorrect length or has invalid characters, it will not submit
     let titleVal = $("#title").val().trim();
     let NonWordRegEx= /\W/g;
-
 
     if (titleVal === "") {
       setHelperText("#titleHelper", "Title cannot be blank");
@@ -90,6 +89,7 @@ const validate = {
   }
 };
 
+// event handlers for validation
 $(document).ready(function () {
   $("#submit").on("click", validate.title);
   $("#submit").on("click", validate.text);
