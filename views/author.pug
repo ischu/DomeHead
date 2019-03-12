@@ -2,7 +2,7 @@ extends main.pug
 
 block create
     .row
-        form.col.s12
+        form.col.s12(onsubmit="validateAuthorForm()")
             #CreateAuthorDiv
                 .row#authorRow
                     .input-field.col.s6

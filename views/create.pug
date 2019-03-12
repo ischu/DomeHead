@@ -8,29 +8,31 @@ block create
         .modal-footer 
             a#authorPage.modal-close.waves-effect.waves-green.btn-flat(href='author') Newbie
     .row
-        form.col.s12
+        form.col.s12(onsubmit="validateTitleForm()")
             #titleGenreDiv
                 .row#titleGenreRow
                     .input-field.col.m6.s5
-                        input#title.validate(placeholder='Placeholder', type='text', required)
+                        input#title.validate(placeholder='Placeholder', type='text', minlength="5", maxlength="40", required, aria-required="true")
                         label(for='title') Story Title
                         span.helper-text(data-error="Title length must be between 5 and 40 characters and may include only letters, numbers, spaces.")
 
             
                     .input-field.col.m6.s5
-                        select#genre(required)
+                        select#genre(required, aria-required="true")
                             option(value='') Genre
                             option(value='1') Option 1
                             option(value='2') Option 2
                             option(value='3') Option 3
                         label Pick your Genre
+                        span.helper-text(data-error="Don't forget to chose a genre!")
+
 
             #textDiv
                 .row#storyRow
-                    form.col.s12
+                    form.col.s12(onsubmit="validateStoryForm()")
                         .row
                         .input-field.col.s12
-                            textarea#text.materialize-textarea(data-length=5000, required)
+                            textarea#text.materialize-textarea(data-length="5000", maxlength="5000", required, aria-required="true")
                             label(for='textarea1') Your Story Here
 
 
