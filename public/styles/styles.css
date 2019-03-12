@@ -62,3 +62,8 @@ h1 {
   margin:15px;
   width: 40%;
 }
+
+#write_story_button{
+  margin-left: 15px;
+  margin-top: 10px;
+}
