@@ -191,8 +191,7 @@ $("#signUpPostButton").show();
 
 // Add event listeners to the submit and delete buttons
 $(document).ready(function () {
-  $("#modal1").modal();
-  $("#modal1").modal("open");
+  $(".sidenav").sidenav();
   $("#submit").on("click", storySubmit);
   $("#authorSubmit").on("click", authorSubmit);
   $('select').formSelect();
