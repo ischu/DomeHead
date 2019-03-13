@@ -1,7 +1,7 @@
 // Get references to page elements
 var $exampleText = $("#example-text");
 var $exampleAuthor = $("#example-description");
-var $exampleGenre = $("example-Genre")
+var $exampleGenre = $("example-Genre");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
 
@@ -111,7 +111,9 @@ var authorSubmit = function (event) {
   event.preventDefault();
 
   var example = {
-    name: $("#createAuthor").val().trim()
+    name: $("#createAuthor").val().trim(),
+    // example- delete later
+    password: "password"
   };
 
   AUTHOR.saveExample(example).then(function () {
