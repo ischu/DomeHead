@@ -45,16 +45,19 @@ const validate = {
   // STORY VALIDATION
   text: () => {
     let textVal= $("#text").val().trim();
-
+    let bracketsRegEx = /\[(\w+)\]/gi;
     // If text is incorrect length, it will not submit
-
-    // we should probably have a check that there is at least one blank in the story
 
     if (textVal === "") {
       setHelperText("#textHelper", "Story cannot be blank");
       $("#text").addClass("invalid");
     } else if (textVal.length >= 5000) {
       setHelperText("#textHelper", "Story cannot be longer than 5000 characters");
+      $("#text").addClass("invalid");
+    } 
+    // validates if there is at least one ["word"] in story body - necessary for play page to load properly
+    else if(bracketsRegEx.exec(textVal)===null){
+      setHelperText("#textHelper", "Make sure to include [word]s in your story!");
       $("#text").addClass("invalid");
     } else {
       $("#text").removeClass("invalid");
