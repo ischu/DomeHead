@@ -25,6 +25,30 @@ module.exports = function(app) {
     });
   });
 
+  // GET single Author by name
+  // For checking if name is taken when signing up
+
+  app.get("/api/authors/:name", function(req, res) {
+    db.Author.findOne({
+      where: {
+        name: req.params.name,
+      }
+    }).then(function(dbAuthor) {
+      if(JSON.parse(dbAuthor) === null){
+        // IS in use - do not let them submit
+        console.log("in use");
+        res.end();
+        return true;
+
+      } else {
+        // IS NOT in use - free to submit
+        console.log("not in use");
+        return false;
+      }
+    });
+  });
+
+
   // GET author by name- empty search will return all authors
 
   app.get("/api/authors", function(req, res) {
