@@ -10,15 +10,32 @@ var AUTHOR = {
       type: "POST",
       url: "api/authors",
       data: JSON.stringify(example)
-    })
+    });
   },
   getExamples: function () {
     return $.ajax({
       url: "api/authors",
       type: GET
-    })
+    });
+  },
+  // method attempts to GETs name to check if username is in use
+  // will return json object if name IS in use, null if name is NOT in use
+  getName: function(nameToCheck) {
+    return $.ajax({
+      url: "api/authors"+nameToCheck,
+      type: GET
+    });
+  },
+  // method runs GET on username/password cobination
+  // will return false if login is unsucessful, returns Author.id if sucessful
+  getLogin: function(name, password) {
+    return $.ajax({
+      url: "api/authors"+name+"/"+password,
+      type: GET
+    });
   }
-}
+
+};
 
 var STORY = {
   saveExample: function (example) {
