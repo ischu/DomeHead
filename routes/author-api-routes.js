@@ -21,7 +21,16 @@ module.exports = function(app) {
         password: req.params.password
       }
     }).then(function(dbAuthor) {
-      res.json(dbAuthor);
+      if(dbAuthor === null){
+        // IS in use - do not let them submit
+        console.log("login failed");
+        return false;
+
+      } else {
+        // IS NOT in use - free to submit
+        console.log("login successful");
+        return res.json(dbAuthor.id);
+      }
     });
   });
 
@@ -34,17 +43,7 @@ module.exports = function(app) {
         name: req.params.name,
       }
     }).then(function(dbAuthor) {
-      if(dbAuthor === null){
-        // IS in use - do not let them submit
-        console.log("in use");
-        return true;
-
-      } else {
-        // IS NOT in use - free to submit
-        res.json(dbAuthor);
-        console.log("not in use");
-        return false;
-      }
+      return res.json(dbAuthor);
     });
   });
 
