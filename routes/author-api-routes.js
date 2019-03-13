@@ -21,11 +21,35 @@ module.exports = function(app) {
         password: req.params.password
       }
     }).then(function(dbAuthor) {
-      res.json(dbAuthor);
+      if(dbAuthor === null){
+        // IS in use - do not let them submit
+        console.log("login failed");
+        return false;
+
+      } else {
+        // IS NOT in use - free to submit
+        console.log("login successful");
+        return res.json(dbAuthor.id);
+      }
     });
   });
 
-  // GET author by name- empty search will return all authors
+  // GET single Author by name
+  // For checking if name is taken when signing up
+
+  app.get("/api/authors/:name", function(req, res) {
+    db.Author.findOne({
+      where: {
+        name: req.params.name,
+      }
+    }).then(function(dbAuthor) {
+      return res.json(dbAuthor);
+    });
+  });
+
+
+  // GET authors by name- empty search will return all authors
+  // For searching site for author or authors
 
   app.get("/api/authors", function(req, res) {
     let query = {};
