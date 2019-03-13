@@ -34,14 +34,15 @@ module.exports = function(app) {
         name: req.params.name,
       }
     }).then(function(dbAuthor) {
-      if(JSON.parse(dbAuthor) === null){
+      if(dbAuthor === null){
         // IS in use - do not let them submit
         console.log("in use");
-        res.end();
+        app.close();
         return true;
 
       } else {
         // IS NOT in use - free to submit
+        res.json(dbAuthor);
         console.log("not in use");
         return false;
       }
