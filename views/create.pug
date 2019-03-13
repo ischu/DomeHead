@@ -3,8 +3,7 @@ extends main.pug
 block create
     .container
         .row
-            form.col.s6
-                .row
+            form.col.s6#loginForm
                     h6 Author Login
                     .input-field.col.s6
                         input#loginName.validate(placeholder='Name', type='text')
@@ -12,8 +11,7 @@ block create
                     .input-field.col.s6
                         input#loginPassword.validate(type='text')
                         label(for='password') Password
-                        a.waves-effect.waves-light.btn-small(id="login-button") Login
-            form.col.s6
+            form.col.s6#signUpForm
                     h6 New Authors
                     .input-field.col.s6
                         input#newName.validate(placeholder='Name', type='text')
@@ -21,7 +19,16 @@ block create
                     .input-field.col.s6
                         input#newPassword.validate(type='text')
                         label(for='password') Password
-                        a.waves-effect.waves-light.btn-small(id="signin-button") Sign Up
+                        
+        .row
+            div.col.s6
+                a.waves-effect.waves-light.btn-small(id="login-button") Login
+                a.waves-effect.waves-light.btn-small(id="loginGetButton") Login
+                a.waves-effect.waves-light.btn-small(id="signUpPostButton") Sign Up
+            div.col.s6
+                a.waves-effect.waves-light.btn-small(id="signup-button") Sign Up
+                
+
         .row
             form#storyForm.col.s12
                 #titleGenreDiv

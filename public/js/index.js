@@ -1,11 +1,4 @@
-// Get references to page elements
-var $exampleText = $("#example-text");
-var $exampleAuthor = $("#example-description");
-var $exampleGenre = $("example-Genre");
-var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
-
-console.log("js is working");
+console.log("js working")
 
 // The STORY object contains methods for each kind of request we'll make
 var AUTHOR = {
@@ -139,9 +132,62 @@ var playSubmit = function (event) {
 
 }
 
-var storyArray = [];
+function hideCreateForm(){
+$("#storyForm").hide();
+}
 
-// $("#STORYDATABASETEXT").replace("[label]", "")
+function showCreateForm(){
+  $("#storyForm").show();
+}
+
+function hideLoginForm(){
+$("#loginForm").hide();
+}
+
+function showLoginForm(){
+  $("#loginForm").show();
+}
+
+function hideSignUpForm(){
+$("#signUpForm").hide();
+}
+
+function showSignUpForm(){
+  $("#signUpForm").show();
+}
+
+function hideSubmit(){
+  $("#submit").hide();
+}
+
+function showSubmit(){
+  $("#submit").show();
+}
+
+function hideSignUpButton(){
+  $("#signup-button").hide();
+}
+
+function hideLoginButton(){
+  $("#login-button").hide();
+}
+
+function hideLoginGet(){
+  $("#loginGetButton").hide();
+}
+
+function showLoginGet(){
+  $("#loginGetButton").show();
+}
+
+function hideSignUpPost(){
+  $("#signUpPostButton").hide();
+}
+
+function showSignUpPost(){
+$("#signUpPostButton").show();
+}
+
 
 // Add event listeners to the submit and delete buttons
 $(document).ready(function () {
@@ -150,7 +196,31 @@ $(document).ready(function () {
   $("#submit").on("click", storySubmit);
   $("#authorSubmit").on("click", authorSubmit);
   $('select').formSelect();
-  $("#storyLink").on("click", playSubmit)
+  $("#storyLink").on("click", playSubmit);
+
+  $("#login-button").on("click", function(){
+    showLoginForm();
+    hideSignUpForm();
+    hideSignUpButton();
+    hideLoginButton();
+    showLoginGet();
+  });
+
+  $("#signup-button").on("click", function(){
+    showSignUpForm();
+    hideLoginForm();
+    hideLoginButton();
+    hideSignUpButton();
+    showSignUpPost();
+  });
+
+  hideCreateForm();
+  hideSignUpForm();
+  hideLoginForm();
+  hideSubmit();
+  hideLoginGet();
+  hideSignUpPost();
 });
+
 
 
