@@ -28,8 +28,8 @@ module.exports = function(app) {
 
       } else {
         // IS NOT in use - free to submit
-        console.log("login successful"+dbAuthor[0].id);
-        return  res.json(dbAuthor[0].id);
+        console.log("login successful"+dbAuthor);
+        return res.json(dbAuthor.id);
       }
     });
   });
@@ -43,14 +43,13 @@ module.exports = function(app) {
         name: req.params.name,
       }
     }).then(function(dbAuthor) {
-      if(dbAuthor === null){
+      if(res.json(dbAuthor.name)){
         // IS in use - do not let them submit
         console.log("in use");
         return true;
 
       } else {
         // IS NOT in use - free to submit
-        res.json(dbAuthor);
         console.log("not in use");
         return false;
       }
