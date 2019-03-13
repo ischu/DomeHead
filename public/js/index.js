@@ -213,6 +213,16 @@ $(document).ready(function () {
     showSignUpPost();
   });
 
+  $("#signUpPostButton").on("click", function(){
+    var example = {
+      name: $("#newName").val().trim(),
+      // example- delete later
+      password: $("#newPassword").val().trim()
+    };
+    AUTHOR.saveExample(example);
+    console.log("new author created");
+  })
+
   hideCreateForm();
   hideSignUpForm();
   hideLoginForm();
