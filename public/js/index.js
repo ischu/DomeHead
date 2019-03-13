@@ -104,7 +104,9 @@ var authorSubmit = function (event) {
   event.preventDefault();
 
   var example = {
-    name: $("#createAuthor").val().trim()
+    name: $("#createAuthor").val().trim(),
+    // example- delete later
+    password: "password"
   };
 
   AUTHOR.saveExample(example).then(function () {
