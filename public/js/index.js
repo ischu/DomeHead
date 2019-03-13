@@ -140,19 +140,19 @@ function showCreateForm(){
   $("#storyForm").show();
 }
 
-function hideLogin(){
+function hideLoginForm(){
 $("#loginForm").hide();
 }
 
-function showLogin(){
+function showLoginForm(){
   $("#loginForm").show();
 }
 
-function hideSignUp(){
+function hideSignUpForm(){
 $("#signUpForm").hide();
 }
 
-function showSignUp(){
+function showSignUpForm(){
   $("#signUpForm").show();
 }
 
@@ -164,6 +164,29 @@ function showSubmit(){
   $("#submit").show();
 }
 
+function hideSignUpButton(){
+  $("#signup-button").hide();
+}
+
+function hideLoginButton(){
+  $("#login-button").hide();
+}
+
+function hideLoginGet(){
+  $("#loginGetButton").hide();
+}
+
+function showLoginGet(){
+  $("#loginGetButton").show();
+}
+
+function hideSignUpPost(){
+  $("#signUpPostButton").hide();
+}
+
+function showSignUpPost(){
+$("#signUpPostButton").show();
+}
 
 
 // Add event listeners to the submit and delete buttons
@@ -174,12 +197,29 @@ $(document).ready(function () {
   $("#authorSubmit").on("click", authorSubmit);
   $('select').formSelect();
   $("#storyLink").on("click", playSubmit);
-  $("#login-button").on("click", showLogin);
-  $("#signup-button").on("click", showSignUp);
+
+  $("#login-button").on("click", function(){
+    showLoginForm();
+    hideSignUpForm();
+    hideSignUpButton();
+    hideLoginButton();
+    showLoginGet();
+  });
+
+  $("#signup-button").on("click", function(){
+    showSignUpForm();
+    hideLoginForm();
+    hideLoginButton();
+    hideSignUpButton();
+    showSignUpPost();
+  });
+
   hideCreateForm();
-  hideSignUp();
-  hideLogin();
+  hideSignUpForm();
+  hideLoginForm();
   hideSubmit();
+  hideLoginGet();
+  hideSignUpPost();
 });
 
 
