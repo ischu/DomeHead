@@ -37,7 +37,6 @@ module.exports = function(app) {
       if(dbAuthor === null){
         // IS in use - do not let them submit
         console.log("in use");
-        app.close();
         return true;
 
       } else {
@@ -50,7 +49,8 @@ module.exports = function(app) {
   });
 
 
-  // GET author by name- empty search will return all authors
+  // GET authors by name- empty search will return all authors
+  // For searching site for author or authors
 
   app.get("/api/authors", function(req, res) {
     let query = {};

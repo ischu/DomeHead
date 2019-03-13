@@ -10,15 +10,23 @@ var AUTHOR = {
       type: "POST",
       url: "api/authors",
       data: JSON.stringify(example)
-    })
+    });
   },
   getExamples: function () {
     return $.ajax({
       url: "api/authors",
       type: GET
-    })
+    });
+  },
+  // method attempts to GETs name to check if username is in use
+  // will return true if name IS in use, false if name is NOT in use
+  getName: function() {
+    return $.ajax({
+      url: "api/authors"+name,
+      type: GET
+    });
   }
-}
+};
 
 var STORY = {
   saveExample: function (example) {
