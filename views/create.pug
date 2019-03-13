@@ -4,7 +4,6 @@ block create
     .container
         .row
             form.col.s6#loginForm
-                .row
                     h6 Author Login
                     .input-field.col.s6
                         input#loginName.validate(placeholder='Name', type='text')
@@ -12,7 +11,6 @@ block create
                     .input-field.col.s6
                         input#loginPassword.validate(type='text')
                         label(for='password') Password
-                        a.waves-effect.waves-light.btn-small(id="login-button") Login
             form.col.s6#signUpForm
                     h6 New Authors
                     .input-field.col.s6
@@ -21,7 +19,13 @@ block create
                     .input-field.col.s6
                         input#newPassword.validate(type='text')
                         label(for='password') Password
-                        a.waves-effect.waves-light.btn-small(id="signin-button") Sign Up
+                        
+        .row
+            div.col.s6
+                a.waves-effect.waves-light.btn-small(id="login-button") Login
+            div.col.s6
+                a.waves-effect.waves-light.btn-small(id="signin-button") Sign Up
+
         .row
             form#storyForm.col.s12
                 #titleGenreDiv

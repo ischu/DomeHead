@@ -1,3 +1,5 @@
+console.log("js working")
+
 // The STORY object contains methods for each kind of request we'll make
 var AUTHOR = {
   saveExample: function (example) {
@@ -132,17 +134,35 @@ function hideCreateForm(){
 $("#storyForm").hide();
 }
 
+function showCreateForm(){
+  $("#storyForm").show();
+}
+
 function hideLogin(){
 $("#loginForm").hide();
 }
 
-function hideSignUp(){
-$("signUpForm").hide();
+function showLogin(){
+  $("#loginForm").show();
 }
 
-hideCreateForm();
-hideSignUp();
-hideLogin();
+function hideSignUp(){
+$("#signUpForm").hide();
+}
+
+function showSignUp(){
+  $("#signUpForm").show();
+}
+
+function hideSubmit(){
+  $("#submit").hide();
+}
+
+function showSubmit(){
+  $("#submit").show();
+}
+
+
 
 // Add event listeners to the submit and delete buttons
 $(document).ready(function () {
@@ -151,7 +171,13 @@ $(document).ready(function () {
   $("#submit").on("click", storySubmit);
   $("#authorSubmit").on("click", authorSubmit);
   $('select').formSelect();
-  $("#storyLink").on("click", playSubmit)
+  $("#storyLink").on("click", playSubmit);
+  $("#login-button").on("click", showLogin);
+  $("#signup-button").on("click", showSignUp);
+  hideCreateForm();
+  hideSignUp();
+  hideLogin();
+  hideSubmit();
 });
 
 
