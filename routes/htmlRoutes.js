@@ -23,10 +23,12 @@ module.exports = function(app) {
   });
 
   app.get("/stories/:authorId", function(req, res){
+    let authorIdCheck = localStorage.getItem("LoggedAuthorId")
+    console.log(authorIdCheck)
     db.Story.findAll({
       include: [db.Author],
       where:{
-        authorId: 
+        authorId: authorIdCheck
       }
     }).then(function(dbExample) {
       console.log(dbExample[0].Author.name);
