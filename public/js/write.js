@@ -1,5 +1,5 @@
 $(function() {
-  console.log(storyBody);
+console.log(storyBody);
   storyBody.match(/\[(\w+)\]/gi).forEach((w) => {
     $("#storyForm").append('<input type ="text" placeholder ="'+w+'"/>');
   });
@@ -12,9 +12,9 @@ $(function() {
       const placeholder = $(el).attr("placeholder");
       storyBody = storyBody.replace(placeholder, word);
       console.log(storyBody)
-            
+
     });
-            
+
     $("#showWrite").empty();
     var writeDiv = $("<div>")
     var newP = $("<p>");
@@ -22,6 +22,5 @@ $(function() {
     newP.text(storyBody)
     $(writeDiv).append(newP);
     $("#showWrite").append(writeDiv);
-            
   });
-});
+}); 

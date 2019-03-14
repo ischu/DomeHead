@@ -29,7 +29,7 @@ module.exports = function(app) {
       } else {
         // IS NOT in use - free to submit
         console.log("login successful");
-        return res.json(dbAuthor.id);
+        return res.json(dbAuthor);
       }
     });
   });

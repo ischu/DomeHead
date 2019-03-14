@@ -22,6 +22,20 @@ module.exports = function(app) {
       });
   });
 
+  app.get("/stories/:authorId", function(req, res){
+    db.Story.findAll({
+      include: [db.Author],
+      where:{
+        authorId: 
+      }
+    }).then(function(dbExample) {
+      console.log(dbExample[0].Author.name);
+      res.render("stories", {
+       stories: dbExample         
+      });
+    });
+  });
+
   app.get("/write/:id", function(req, res){
     db.Story.findOne({
       where:{

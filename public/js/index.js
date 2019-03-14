@@ -150,15 +150,15 @@ var playSubmit = function (event) {
 }
 
 function hideCreateForm(){
-$("#storyForm").hide();
+  $("#createForm").hide();
 }
 
 function showCreateForm(){
-  $("#storyForm").show();
+  $("#createForm").show();
 }
 
 function hideLoginForm(){
-$("#loginForm").hide();
+  $("#loginForm").hide();
 }
 
 function showLoginForm(){
