@@ -19,33 +19,18 @@ var AUTHOR = {
     });
   },
   // method attempts to GETs name to check if username is in use
-<<<<<<< HEAD
-  // will return true if name IS in use, false if name is NOT in use
-  getName: function(nameToCheck) {
-    return $.ajax({
-      url: "api/authors"+nameToCheck,
-      type: GET
-    });
-  },
-  // method runs GET on username/password cobination
-  // returns false if login is unsucessful, returns Author.id if sucessful
-  getLogin: function(name, password) {
-    return $.ajax({
-      url: "api/authors"+name+"/"+password,
-=======
   // will return json object if name IS in use, null if name is NOT in use
-  getName: function(nameToCheck) {
+  getName: function (nameToCheck) {
     return $.ajax({
-      url: "api/authors/"+nameToCheck,
->>>>>>> 6fba36604b2239b22fd9fe982cdeb66ff9a98b3c
+      url: "api/authors/" + nameToCheck,
       type: GET
     });
   },
   // method runs GET on username/password cobination
-  // will return false if login is unsucessful, returns Author.id if sucessful
-  getLogin: function(name, password) {
+  // will return false if login is unsucessful, returns Author object if sucessful
+  getLogin: function (name, password) {
     return $.ajax({
-      url: "api/authors/"+name+"/"+password,
+      url: "api/authors/" + name + "/" + password,
       type: "GET"
     });
   }
@@ -164,61 +149,61 @@ var playSubmit = function (event) {
 
 }
 
-function hideCreateForm(){
-$("#storyForm").hide();
+// function hideCreateForm(){
+// $("#createForm").hide();
+// }
+
+function showCreateForm() {
+  $("#createForm").show();
 }
 
-function showCreateForm(){
-  $("#storyForm").show();
-}
+// function hideLoginForm(){
+// $("#loginForm").hide();
+// }
 
-function hideLoginForm(){
-$("#loginForm").hide();
-}
+// function showLoginForm(){
+//   $("#loginForm").show();
+// }
 
-function showLoginForm(){
-  $("#loginForm").show();
-}
+// function hideSignUpForm(){
+// $("#signUpForm").hide();
+// }
 
-function hideSignUpForm(){
-$("#signUpForm").hide();
-}
+// function showSignUpForm(){
+//   $("#signUpForm").show();
+// }
 
-function showSignUpForm(){
-  $("#signUpForm").show();
-}
+// function hideSubmit(){
+//   $("#submit").hide();
+// }
 
-function hideSubmit(){
-  $("#submit").hide();
-}
-
-function showSubmit(){
+function showSubmit() {
   $("#submit").show();
 }
 
-function hideSignUpButton(){
-  $("#signup-button").hide();
-}
+// function hideSignUpButton(){
+//   $("#signup-button").hide();
+// }
 
-function hideLoginButton(){
-  $("#login-button").hide();
-}
+// function hideLoginButton(){
+//   $("#login-button").hide();
+// }
 
-function hideLoginGet(){
-  $("#loginGetButton").hide();
-}
+// function hideLoginGet(){
+//   $("#loginGetButton").hide();
+// }
 
-function showLoginGet(){
-  $("#loginGetButton").show();
-}
+// function showLoginGet(){
+//   $("#loginGetButton").show();
+// }
 
-function hideSignUpPost(){
-  $("#signUpPostButton").hide();
-}
+// function hideSignUpPost(){
+//   $("#signUpPostButton").hide();
+// }
 
-function showSignUpPost(){
-$("#signUpPostButton").show();
-}
+// function showSignUpPost(){
+// $("#signUpPostButton").show();
+// }
 
 
 // Add event listeners to the submit and delete buttons
@@ -229,23 +214,28 @@ $(document).ready(function () {
   $('select').formSelect();
   $("#storyLink").on("click", playSubmit);
 
-  $("#login-button").on("click", function(){
-    showLoginForm();
-    hideSignUpForm();
-    hideSignUpButton();
-    hideLoginButton();
-    showLoginGet();
+  $("#login-button").on("click", function () {
+    // show login form
+    $("#loginForm").show();
+    $("#loginGetButton").show();
+    // hide sign up form and "login" button
+    $("#signUpForm").hide();
+    $("#signup-button").hide();
+    $("#login-button").hide();
+
   });
 
-  $("#signup-button").on("click", function(){
-    showSignUpForm();
-    hideLoginForm();
-    hideLoginButton();
-    hideSignUpButton();
-    showSignUpPost();
+  $("#signup-button").on("click", function () {
+    // show sign up form
+    $("#signUpForm").show();
+    $("#signUpPostButton").show();
+    // hide login form and "sign up" button
+    $("#loginForm").hide();
+    $("#login-button").hide();
+    $("#signup-button").hide();
   });
 
-  $("#signUpPostButton").on("click", function(){
+  $("#signUpPostButton").on("click", function () {
     var example = {
       name: $("#newName").val().trim(),
       // example- delete later
@@ -255,24 +245,25 @@ $(document).ready(function () {
     console.log("new author created");
   })
 
-  $("#loginGetButton").on("click", function(){
+  $("#loginGetButton").on("click", function () {
     let loginData = {
       name: $("#loginName").val().trim(),
       password: $("#loginPassword").val().trim()
     }
-    AUTHOR.getLogin(loginData.name, loginData.password).then(function CheckLogin(){
+    AUTHOR.getLogin(loginData.name, loginData.password).then(function CheckLogin() {
       // if (loginData.name === res.name && loginData.password === res.password){
       //   console.log("login successful")
       // }
     })
   })
 
-  hideCreateForm();
-  hideSignUpForm();
-  hideLoginForm();
-  hideSubmit();
-  hideLoginGet();
-  hideSignUpPost();
+  // create page loads with forms hidden
+  $("#createForm").hide();
+  $("#signUpForm").hide();
+  $("#loginForm").hide();
+  $("#submit").hide();
+  $("#loginGetButton").hide();
+  $("#signUpPostButton").hide();;
 });
 
 
