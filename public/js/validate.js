@@ -9,7 +9,7 @@ const validate = {
   title: () => {
     //If title is incorrect length or has invalid characters, it will not submit
     let titleVal = $("#title").val().trim();
-    let NonWordRegEx= /\W/g;
+    let wordSpaceRegEx= /[\w ]/g;
 
     if (titleVal === "") {
       setHelperText("#titleHelper", "Title cannot be blank");
@@ -19,8 +19,8 @@ const validate = {
     } else if (titleVal.length >= 40) {
       setHelperText("#titleHelper", "Title cannot be longer than 40 characters");
     }
-    // checks for invalid characters
-    else if (NonWordRegEx.test(titleVal)) {
+    // checks there are no invalid characters
+    else if (wordSpaceRegEx.exec(titleVal)!==null) {
       $("#title").addClass("invalid");
       setHelperText("#titleHelper", "Title may only contain letters, numbers, and spaces");
     } else {
