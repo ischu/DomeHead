@@ -2,7 +2,7 @@ extends main.pug
 
 block create
     .container
-        .row
+        .row(id="createPage")
             form.col.s6#loginForm
                     h6 Author Login
                     .input-field.col.s6
@@ -21,7 +21,7 @@ block create
                         input#newPassword.validate(type='text')
                         label(for='password') Password
                         
-        .row
+        .row(id="accountButtons")
             div.col.s6
                 a.waves-effect.waves-light.btn-small(id="login-button") Login
                 a.waves-effect.waves-light.btn-small(id="loginGetButton") Login
