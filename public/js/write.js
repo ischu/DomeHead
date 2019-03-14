@@ -22,6 +22,5 @@ $(function() {
     newP.text(storyBody)
     $(writeDiv).append(newP);
     $("#showWrite").append(writeDiv);
-            
   });
 });
