@@ -135,7 +135,7 @@ $(document).ready(function () {
   $(".sidenav").sidenav();
   $("#submit").on("click", storySubmit);
   $('select').formSelect();
-  $("#storyLink").on("click", playSubmit);
+  function playSubmit(){}
 
   $("#login-button").on("click", function () {
     // show login form

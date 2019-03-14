@@ -9,10 +9,26 @@ body {
   min-height: 1000px;
 }
 
+.card {
+  background-color: #214973;
+}
+
+.card-content {
+  font-family: 'Teko', sans-serif;
+}
+
+#pageTitle {
+  font-family: 'Teko', sans-serif;
+  font-size: 50px !important;
+}
+
+.nav-wrapper {
+  background-color: #2D6599;
+}
+
 .container {
-  background-color: lightblue;
+  background-color: rgba(238,238,238, 0.9);
   margin-top: 15px;
-  padding: 20px;
   border-radius: 15px;
 }
 
@@ -31,6 +47,22 @@ body {
   padding: 0;
 }
 
+.btn {
+  background-color: #f9df60;
+}
+
+.btn:hover {
+  background-color: #E3CB14;
+}
+
+.btn-small {
+  background-color: #f9df60;
+}
+
+.btn-small:hover {
+  background-color: #E3CB14;
+}
+
 #colOne{
   padding: 0;
 }
@@ -38,6 +70,24 @@ body {
 .row{
   margin:0;
   padding:0;
+}
+
+#introduction {
+  padding: 10px;
+  margin: auto;
+}
+
+#createPage {
+  margin: 15px;
+}
+
+#accountButtons {
+  margin: auto;
+  margin-bottom: 15px;
+}
+
+#submit {
+  margin: 10px;
 }
 
 #titleGenreRow{
@@ -62,18 +112,52 @@ body {
 
 #storyLink{
   color:white;
+  font-size:calc(100% + 2vw);
 }
 
 #newP{
   font-size: 28px;
 }
 
+#storiesPage {
+  padding: 20px;
+}
+
 #storiesDisplay{
-  margin:15px;
-  width: 40%;
+  margin:auto;
+  margin-bottom: 30px;
+  float: left;
+  width:50%;
+  word-wrap: break-word;
 }
 
 #write_story_button{
   margin-left: 15px;
   margin-top: 10px;
+}
+
+#viewMyStories {
+  font-family: 'Teko', sans-serif;
+  margin-left: 25px;
+  font-size:calc(100% + 2vw);
+}
+
+#viewMyStories:hover {
+  color: #479EF7;
+}
+
+#storyForm {
+  margin: 35px;
+}
+
+@media screen and (max-width: 480px) {
+  #storiesDisplay {
+    width: 100%;
+    margin: auto;
+    margin-bottom: 8px;
+  }
+
+  #storyLink {
+    font-size:calc(100% + 5vw);
+  }
 }
