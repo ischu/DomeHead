@@ -31,12 +31,12 @@ module.exports = function(app) {
     db.Story.findAll({
       include: [db.Author],
       where:{
-        authorId: 7
+        id: localStorage.getItem(LoggedAuthorId),
       }
     }).then(function(dbExample) {
       console.log(dbExample);
       res.render("stories", {
-       stories: dbExample         
+      stories: dbExample         
       });
     });
   });

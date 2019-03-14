@@ -1,4 +1,4 @@
-console.log("js working")
+console.log("js working");
 
 // The STORY object contains methods for each kind of request we'll make
 var AUTHOR = {
