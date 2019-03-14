@@ -1,8 +1,11 @@
 extends main.pug
 
 block create
-    .container
+    .container 
+        script.
+            var authorId = localStorage.getItem("LoggedAuthorId")
         .row
+            a#viewMyStories(href="stories/"+authorId) show my stories
             div#storyDiv
                 .row
                     ul
