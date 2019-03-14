@@ -27,7 +27,7 @@ module.exports = function(app) {
 
       } else {
         console.log("login successful");
-        return res.json(dbAuthor.id);
+        return res.json(dbAuthor);
       }
     });
   });
