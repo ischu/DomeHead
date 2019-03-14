@@ -2,12 +2,11 @@ extends main.pug
 
 block create
     .container 
-        script.
         .row
-            a#viewMyStories(href="") show my stories
-            var authorId = localStorage.getItem("LoggedAuthorId")
+            form
+            .input-field
+                input#search(placeholder="Search" type='search', required='')
         .row(id="storiesPage")
-            a#viewMyStories(href="stories/"+authorId) Show My Stories
             div#storyDiv
                 .row
                     ul
