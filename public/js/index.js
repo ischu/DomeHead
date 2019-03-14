@@ -62,35 +62,6 @@ var STORY = {
   }
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
-// var refreshExamples = function () {
-//   STORY.getExamples().then(function (data) {
-//     var $examples = data.map(function (example) {
-//       var $a = $("<a>")
-//         .text(example.text)
-//         .attr("href", "/example/" + example.id);
-
-//       var $li = $("<li>")
-//         .attr({
-//           class: "list-group-item",
-//           "data-id": example.id
-//         })
-//         .append($a);
-
-//       var $button = $("<button>")
-//         .addClass("btn btn-danger float-right delete")
-//         .text("ｘ");
-
-//       $li.append($button);
-
-//       return $li;
-//     });
-
-//     $exampleList.empty();
-//     $exampleList.append($examples);
-//   });
-// };
-
 // storySubmit is called whenever we submit a new story
 var storySubmit = function (event) {
   event.preventDefault();
@@ -108,7 +79,6 @@ var storySubmit = function (event) {
 
   STORY.saveExample(example).then(function () {
     console.log("saveExampleStory");
-    refreshExamples();
   });
 
   $("#title").val("");
