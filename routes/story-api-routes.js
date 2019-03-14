@@ -1,5 +1,3 @@
-// Copied originally from class activity- some routes will be removed later
-
 // Dependencies
 // =============================================================
 

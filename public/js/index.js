@@ -19,6 +19,7 @@ var AUTHOR = {
     });
   },
   // method attempts to GETs name to check if username is in use
+<<<<<<< HEAD
   // will return true if name IS in use, false if name is NOT in use
   getName: function(nameToCheck) {
     return $.ajax({
@@ -31,7 +32,21 @@ var AUTHOR = {
   getLogin: function(name, password) {
     return $.ajax({
       url: "api/authors"+name+"/"+password,
+=======
+  // will return json object if name IS in use, null if name is NOT in use
+  getName: function(nameToCheck) {
+    return $.ajax({
+      url: "api/authors/"+nameToCheck,
+>>>>>>> 6fba36604b2239b22fd9fe982cdeb66ff9a98b3c
       type: GET
+    });
+  },
+  // method runs GET on username/password cobination
+  // will return false if login is unsucessful, returns Author.id if sucessful
+  getLogin: function(name, password) {
+    return $.ajax({
+      url: "api/authors/"+name+"/"+password,
+      type: "GET"
     });
   }
 
@@ -229,6 +244,28 @@ $(document).ready(function () {
     hideSignUpButton();
     showSignUpPost();
   });
+
+  $("#signUpPostButton").on("click", function(){
+    var example = {
+      name: $("#newName").val().trim(),
+      // example- delete later
+      password: $("#newPassword").val().trim()
+    };
+    AUTHOR.saveExample(example);
+    console.log("new author created");
+  })
+
+  $("#loginGetButton").on("click", function(){
+    let loginData = {
+      name: $("#loginName").val().trim(),
+      password: $("#loginPassword").val().trim()
+    }
+    AUTHOR.getLogin(loginData.name, loginData.password).then(function CheckLogin(){
+      // if (loginData.name === res.name && loginData.password === res.password){
+      //   console.log("login successful")
+      // }
+    })
+  })
 
   hideCreateForm();
   hideSignUpForm();
