@@ -68,26 +68,26 @@ const validate = {
   author: () => {
     //If author is incorrect length or has invalid characters, it will not submit
 
-    let authorVal= $("#createAuthor").val().trim();
+    let authorVal= $("#newName").val().trim();
     let NonWordRegEx= /\W/g;
 
     if (authorVal === "") {
-      setHelperText("#AuthorHelper", "Author cannot be blank");
+      setHelperText("#nameHelper", "Author cannot be blank");
     } // next two check for valid length
     else if (authorVal.length < 3) {
-      $("#createAuthor").addClass("invalid");
-      setHelperText("#AuthorHelper", "Author name must be longer than 3 characters");
+      $("#newName").addClass("invalid");
+      setHelperText("#nameHelper", "Name must be at least 3 characters long");
     } else if (authorVal.length >= 20) {
-      $("#createAuthor").addClass("invalid");
-      setHelperText("#AuthorHelper", "Title cannot be longer than 20 characters");
+      $("#newName").addClass("invalid");
+      setHelperText("#nameHelper", "Title cannot be longer than 20 characters");
     }
     // checks for invalid characters
     else if (NonWordRegEx.test(authorVal)) {
-      $("#createAuthor").addClass("invalid");
-      setHelperText("#AuthorHelper", "Title may only contain letters, numbers, and spaces");
+      $("#newName").addClass("invalid");
+      setHelperText("#nameHelper", "Title may only contain letters, numbers, and spaces");
     } else {
-      $("#createAuthor").removeClass("invalid");
-      $("#createAuthor").addClass("valid");
+      $("#newName").removeClass("invalid");
+      $("#newName").addClass("valid");
     }
   }
 };
@@ -97,5 +97,5 @@ $(document).ready(function () {
   $("#submit").on("click", validate.title);
   $("#submit").on("click", validate.text);
   $("#submit").on("click", validate.genre);
-  $("#authorSubmit").on("click", validate.author);
+  $("#signUpPostButton").on("click", validate.author);
 });

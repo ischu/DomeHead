@@ -94,7 +94,7 @@ var STORY = {
 // storySubmit is called whenever we submit a new story
 var storySubmit = function (event) {
   event.preventDefault();
-
+  let storedId = localStorage.getItem("LoggedAuthorId");
   let titleVal = $("#title").val().trim();
   let textVal = $("#text").val().trim();
   let genreVal = $("#genre").val();
@@ -103,7 +103,7 @@ var storySubmit = function (event) {
     title: titleVal,
     body: textVal,
     genre: genreVal,
-    AuthorId: 1 //EXAMPLE AUTHOR VARIABLE
+    AuthorId: storedId //EXAMPLE AUTHOR VARIABLE
   };
 
   STORY.saveExample(example).then(function () {
@@ -116,19 +116,6 @@ var storySubmit = function (event) {
 
 };
 
-var authorSubmit = function (event) {
-  event.preventDefault();
-
-  var example = {
-    name: $("#createAuthor").val().trim(),
-    // example- delete later
-    password: "password"
-  };
-
-  AUTHOR.saveExample(example).then(function () {
-    console.log("saveExampleAuthor");
-  });
-};
 
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -143,73 +130,10 @@ var handleDeleteBtnClick = function () {
   });
 };
 
-//testing js functionality
-var playSubmit = function (event) {
-
-}
-
-// function hideCreateForm(){
-// $("#createForm").hide();
-// }
-
-function showCreateForm() {
-  $("#createForm").show();
-}
-
-// function hideLoginForm(){
-// $("#loginForm").hide();
-// }
-
-// function showLoginForm(){
-//   $("#loginForm").show();
-// }
-
-// function hideSignUpForm(){
-// $("#signUpForm").hide();
-// }
-
-// function showSignUpForm(){
-//   $("#signUpForm").show();
-// }
-
-// function hideSubmit(){
-//   $("#submit").hide();
-// }
-
-function showSubmit() {
-  $("#submit").show();
-}
-
-// function hideSignUpButton(){
-//   $("#signup-button").hide();
-// }
-
-// function hideLoginButton(){
-//   $("#login-button").hide();
-// }
-
-// function hideLoginGet(){
-//   $("#loginGetButton").hide();
-// }
-
-// function showLoginGet(){
-//   $("#loginGetButton").show();
-// }
-
-// function hideSignUpPost(){
-//   $("#signUpPostButton").hide();
-// }
-
-// function showSignUpPost(){
-// $("#signUpPostButton").show();
-// }
-
-
 // Add event listeners to the submit and delete buttons
 $(document).ready(function () {
   $(".sidenav").sidenav();
   $("#submit").on("click", storySubmit);
-  $("#authorSubmit").on("click", authorSubmit);
   $('select').formSelect();
   $("#storyLink").on("click", playSubmit);
 
@@ -233,17 +157,20 @@ $(document).ready(function () {
     $("#login-button").hide();
     $("#signup-button").hide();
   });
-
+  // SIGN UP BUTTON
+  // posts new author
   $("#signUpPostButton").on("click", function () {
     var example = {
       name: $("#newName").val().trim(),
-      // example- delete later
       password: $("#newPassword").val().trim()
     };
     AUTHOR.saveExample(example);
+    $("#createForm").show();
+    $("#submit").show();
     console.log("new author created");
-  })
+  });
   // LOGIN BUTTON
+  // gets existing author id, stores it locally
   $("#loginGetButton").on("click", function () {
     let loginData = {
       name: $("#loginName").val().trim(),
@@ -253,6 +180,8 @@ $(document).ready(function () {
       if (loginData.name === res.name && loginData.password === res.password){
         console.log("login successful");
         localStorage.setItem("LoggedAuthorId", res.id);
+        $("#createForm").show();
+        $("#submit").show();
       }else{
         console.log("login failed");
       }
@@ -265,7 +194,7 @@ $(document).ready(function () {
   $("#loginForm").hide();
   $("#submit").hide();
   $("#loginGetButton").hide();
-  $("#signUpPostButton").hide();;
+  $("#signUpPostButton").hide();
 });
 
 
