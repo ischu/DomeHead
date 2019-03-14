@@ -11,6 +11,8 @@ html(lang="en")
             link(href='https://fonts.googleapis.com/css?family=Teko', rel='stylesheet')
             script(src='https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js')
             link(rel="stylesheet", type="text/css", href="/styles/styles.css")
+            script(src="/js/validate.js")
+            script(src="/js/index.js")
             script(src="js/validate.js")
             script(src="js/index.js")
             title Rad Libs
@@ -27,6 +29,8 @@ html(lang="en")
                 .nav-wrapper
                     a.sidenav-trigger(href='#', data-target='mobile-demo')
                         i.material-icons menu
+                    
+
                     ul.left.hide-on-med-and-down
                         li
                             a(href="/") Home
@@ -38,6 +42,21 @@ html(lang="en")
                             a(href="/author") Authors
                         li 
                             a(href="/write") Play
+                        li
+                            .input-field
+                                input#search(type='search', required='')
+                                label.label-icon.left(for='search')
+                                    i.material-icons.left search
+ 
+                                
+                                
+
+
+
+
+
+                                    
+
                     ul#mobile-demo.sidenav
                         li
                             a(href="/") Home

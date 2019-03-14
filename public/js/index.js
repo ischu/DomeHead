@@ -188,6 +188,15 @@ $(document).ready(function () {
     });
   });
 
+  function playSubmit(){
+  }
+  let hrefId = localStorage.getItem("LoggedAuthorId")
+  if (hrefId != null){
+  $("#viewMyStories").attr("href", "/stories/"+hrefId);
+  }
+  else {
+    $()
+  }
   // create page loads with forms hidden
   $("#createForm").hide();
   $("#signUpForm").hide();

@@ -3,6 +3,8 @@ extends main.pug
 block create
     .container 
         script.
+        .row
+            a#viewMyStories(href="") show my stories
             var authorId = localStorage.getItem("LoggedAuthorId")
         .row(id="storiesPage")
             a#viewMyStories(href="stories/"+authorId) Show My Stories
@@ -15,7 +17,6 @@ block create
                                     .card.blue-grey.darken-1
                                         .card-content.white-text
                                             a#storyLink.card-title(href="write/"+story.id) #{story.title}
-                
                                         .card-action
                                             a #{story.genre}
                                             a #{story.Author.name}

@@ -1,6 +1,8 @@
 var db = require("../models");
 var Sequelize = require("sequelize")
 
+
+
 module.exports = function(app) {
   // Load index page
   app.get("/", function(req, res) {
@@ -15,23 +17,24 @@ module.exports = function(app) {
       db.Story.findAll({
         include: [db.Author]
       }).then(function(dbExample) {
-        console.log(dbExample[0].Author.name);
+        console.log(dbExample[0
+        ].Author.name);
         res.render("stories", {
          stories: dbExample         
         });
       });
   });
 
-  app.get("/stories/:authorId", function(req, res){
-    let authorIdCheck = localStorage.getItem("LoggedAuthorId")
-    console.log(authorIdCheck)
+  app.get("authorsWork?id=", function(req, res){
+    
+    
     db.Story.findAll({
       include: [db.Author],
       where:{
-        authorId: authorIdCheck
+        authorId: 7
       }
     }).then(function(dbExample) {
-      console.log(dbExample[0].Author.name);
+      console.log(dbExample);
       res.render("stories", {
        stories: dbExample         
       });

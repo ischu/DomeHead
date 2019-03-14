@@ -1,7 +1,7 @@
 $(function() {
-console.log(storyBody);
+  console.log(storyBody);
   storyBody.match(/\[(\w+)\]/gi).forEach((w) => {
-      $("#storyForm").append('<input type ="text" placeholder ="'+w+'"/>');
+    $("#storyForm").append('<input type ="text" placeholder ="'+w+'"/>');
   });
   $("#storyForm").append('<button class="waves-effect waves-light btn" id = "write_story_button"> Write Story </button>');
   $("#write_story_button").click(function writeStory(event){
@@ -12,9 +12,9 @@ console.log(storyBody);
       const placeholder = $(el).attr("placeholder");
       storyBody = storyBody.replace(placeholder, word);
       console.log(storyBody)
-
+            
     });
-
+            
     $("#showWrite").empty();
     var writeDiv = $("<div>")
     var newP = $("<p>");
@@ -23,4 +23,4 @@ console.log(storyBody);
     $(writeDiv).append(newP);
     $("#showWrite").append(writeDiv);
   });
-}); 
+});
