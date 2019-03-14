@@ -78,6 +78,9 @@ module.exports = function(app) {
           [Op.like]: "%" + req.query.name + "%"
         };
     }
+    if (req.query.id) {
+      query.id = req.query.id;
+    }
     db.Author.findAll({
       where: query,
       include: [
