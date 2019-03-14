@@ -16,6 +16,7 @@ block create
                     .input-field.col.s6
                         input#newName.validate(placeholder='Name', type='text')
                         label(for='new_name') Name
+                        span#nameHelper.helper-text(data-error="author name must be between 3 and 20 characters")
                     .input-field.col.s6
                         input#newPassword.validate(type='text')
                         label(for='password') Password
