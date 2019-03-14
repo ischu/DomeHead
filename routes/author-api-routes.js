@@ -67,7 +67,7 @@ module.exports = function(app) {
   });
 
   // GET authors and their stories
-
+  // used for getting logged in author's stories
   app.get("/api/authorsWork", function(req, res) {
     let query = {};
     // For searching authors by name
@@ -81,7 +81,7 @@ module.exports = function(app) {
     if (req.query.id) {
       query.id = req.query.id;
     }
-    db.Author.findAll({
+    db.Author.findOne({
       where: query,
       include: [
         {
