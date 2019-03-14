@@ -22,14 +22,12 @@ module.exports = function(app) {
       }
     }).then(function(dbAuthor) {
       if(dbAuthor === null){
-        // IS in use - do not let them submit
         console.log("login failed");
         return false;
 
       } else {
-        // IS NOT in use - free to submit
         console.log("login successful");
-        return res.json(dbAuthor.id);
+        return res.json(dbAuthor);
       }
     });
   });
