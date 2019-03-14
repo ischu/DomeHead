@@ -25,21 +25,14 @@ module.exports = function(app) {
       });
   });
 
-  app.get("authorsWork?id=", function(req, res){
-    
-    
-    db.Story.findAll({
-      include: [db.Author],
-      where:{
-        authorId: 7
-      }
-    }).then(function(dbExample) {
-      console.log(dbExample);
-      res.render("stories", {
-       stories: dbExample         
-      });
-    });
-  });
+  // app.get("/stories/authorId", function(req, res){
+  //   }).then(function(dbExample) {
+  //     console.log(dbExample);
+  //     res.render("stories", {
+  //      stories: dbExample         
+  //     });
+  //   });
+  
 
   app.get("/write/:id", function(req, res){
     db.Story.findOne({
@@ -53,9 +46,9 @@ module.exports = function(app) {
     })
   });
 
-  app.get("/author", function(req, res){
+  app.get("/profile", function(req, res){
       db.Author.findAll({}).then(function(dbExample) {
-        res.render("author", {
+        res.render("profile", {
           authors: dbExample
         });
       });
