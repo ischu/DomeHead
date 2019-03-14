@@ -11,19 +11,43 @@ const Op = Sequelize.Op;
 // =============================================================
 
 module.exports = function(app) {
+  // GET single Author by name 
+  // For Logging In
+
+  app.get("/api/authors/:name/:password", function(req, res) {
+    db.Author.findOne({
+      where: {
+        name: req.params.name,
+        password: req.params.password
+      }
+    }).then(function(dbAuthor) {
+      if(dbAuthor === null){
+        console.log("login failed");
+        return false;
+
+      } else {
+        console.log("login successful");
+        return res.json(dbAuthor);
+      }
+    });
+  });
+
   // GET single Author by name
+  // For checking if name is taken when signing up
 
   app.get("/api/authors/:name", function(req, res) {
     db.Author.findOne({
       where: {
-        name: req.params.name
+        name: req.params.name,
       }
     }).then(function(dbAuthor) {
-      res.json(dbAuthor);
+      return res.json(dbAuthor);
     });
   });
 
-  // GET author by name- empty search will return all authors
+
+  // GET authors by name- empty search will return all authors
+  // For searching site for author or authors
 
   app.get("/api/authors", function(req, res) {
     let query = {};
@@ -43,7 +67,7 @@ module.exports = function(app) {
   });
 
   // GET authors and their stories
-
+  // used for getting logged in author's stories
   app.get("/api/authorsWork", function(req, res) {
     let query = {};
     // For searching authors by name
@@ -54,7 +78,10 @@ module.exports = function(app) {
           [Op.like]: "%" + req.query.name + "%"
         };
     }
-    db.Author.findAll({
+    if (req.query.id) {
+      query.id = req.query.id;
+    }
+    db.Author.findOne({
       where: query,
       include: [
         {
@@ -68,9 +95,13 @@ module.exports = function(app) {
   });
 
   app.post("/api/authors", function(req, res) {
-    db.Author.create(req.body).then(function(dbAuthor) {
-      res.json(dbAuthor);
-    });
+    db.Author.create(req.body)
+      .then(function(dbAuthor) {
+        res.json(dbAuthor);
+      })
+      .catch(function(err) {
+        console.log(err);
+      });
   });
 
   //   app.delete("/api/authors/:id", function(req, res) {

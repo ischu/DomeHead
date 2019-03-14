@@ -1,4 +1,7 @@
 var db = require("../models");
+var Sequelize = require("sequelize")
+
+
 
 module.exports = function(app) {
   // Load index page
@@ -14,17 +17,38 @@ module.exports = function(app) {
       db.Story.findAll({
         include: [db.Author]
       }).then(function(dbExample) {
-        console.log(dbExample[0].Author.name);
+        console.log(dbExample[0
+        ].Author.name);
         res.render("stories", {
          stories: dbExample         
         });
       });
   });
 
-  app.get("/write", function(req, res){
-    db.Story.findOne({}).then(function(dbExample){
+  app.get("authorsWork?id=", function(req, res){
+    
+    
+    db.Story.findAll({
+      include: [db.Author],
+      where:{
+        authorId: 7
+      }
+    }).then(function(dbExample) {
+      console.log(dbExample);
+      res.render("stories", {
+       stories: dbExample         
+      });
+    });
+  });
+
+  app.get("/write/:id", function(req, res){
+    db.Story.findOne({
+      where:{
+        id: req.params.id    
+      }
+    }).then(function(dbExample){
       res.render("write", {
-        write: dbExample
+        stories: dbExample
       })
     })
   });
@@ -32,11 +56,20 @@ module.exports = function(app) {
   app.get("/author", function(req, res){
       db.Author.findAll({}).then(function(dbExample) {
         res.render("author", {
-          author: dbExample
+          authors: dbExample
         });
       });
   });
 
+  app.get("/write", function(req, res){
+    db.Story.findOne({
+      order: Sequelize.literal('rand()'), limit: 1 
+    }).then(function(dbExample){
+      res.render("write", {
+        stories: dbExample
+      })
+    })
+  });
   
   // Load example page and pass in an example by id
   

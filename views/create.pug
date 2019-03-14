@@ -1,36 +1,65 @@
 extends main.pug
 
 block create
-    #modal1.modal
-        .modal-content
-            a#authorDrop.dropdown-trigger.btn(href='#', data-target='dropdown1') Drop Me!
-            p New here? Click the "Newbie" button to follow the link to our author page!
-        .modal-footer 
-            a#authorPage.modal-close.waves-effect.waves-green.btn-flat(href='author') Newbie
-    .row
-        form.col.s12
-            #titleGenreDiv
-                .row#titleGenreRow
-                    .input-field.col.m6.s5
-                        input#title.validate(placeholder='Placeholder', type='text')
-                        label(for='title') Story Title
-            
-                    .input-field.col.m6.s5
-                        select#genre
-                            option(value='') Genre
-                            option(value='1') Option 1
-                            option(value='2') Option 2
-                            option(value='3') Option 3
-                        label Pick your Genre
+    .container
+        .row(id="createPage")
+            form.col.s6#loginForm
+                    h6 Author Login
+                    .input-field.col.s6
+                        input#loginName.validate(placeholder='Name', type='text')
+                        label(for='login_name') Name
+                    .input-field.col.s6
+                        input#loginPassword.validate(type='text')
+                        label(for='password') Password
+            form.col.s6#signUpForm
+                    h6 New Authors
+                    .input-field.col.s6
+                        input#newName.validate(placeholder='Name', type='text')
+                        label(for='new_name') Name
+                        span#nameHelper.helper-text(data-error="author name must be between 3 and 20 characters")
+                    .input-field.col.s6
+                        input#newPassword.validate(type='text')
+                        label(for='password') Password
+                        
+        .row(id="accountButtons")
+            div.col.s6
+                a.waves-effect.waves-light.btn-small(id="login-button") Login
+                a.waves-effect.waves-light.btn-small(id="loginGetButton") Login
+                a.waves-effect.waves-light.btn-small(id="signUpPostButton") Sign Up
+            div.col.s6
+                a.waves-effect.waves-light.btn-small(id="signup-button") Sign Up
+                
 
-            #textDiv
-                .row#storyRow
-                    form.col.s12
-                        .row
-                        .input-field.col.s12
-                            textarea#text.materialize-textarea
-                            label(for='textarea1') Your Story Here 
+        .row
+            form#createForm.col.s12
+                #titleGenreDiv
+                    .row#titleGenreRow
+                        .input-field.col.m6.s5
+                            input#title.validate(placeholder='Placeholder', type='text', minlength="5", maxlength="40", required, aria-required="true")
+                            label(for='title') Story Title
+                            span#titleHelper.helper-text(data-error="Every story needs a title!")
 
-            button#submit.btn.waves-effect.waves-light(type='submit', name='action')
-                | Submit
-                i.material-icons.right
+                
+                        .input-field.col.m6.s5
+                            select#genre.validate(required, aria-required="true")
+                                option(value=null) Genre
+                                option(value='Drama') Drama
+                                option(value='Comedy') Comedy
+                                option(value='Scary') Scary
+                            label Pick your Genre
+                            span.helper-text(data-error="Don't forget to chose a genre!")
+
+
+                #textDiv
+                    .row#storyRow
+                        form.col.s12
+                            .row
+                            .input-field.col.s12
+                                textarea#text.materialize-textarea.validate(data-length="5000", maxlength="5000", required, aria-required="true")
+                                label(for='textarea1') Your Story Here
+
+
+
+                button#submit.btn.waves-effect.waves-light(type='submit', name='action')
+                    | Submit
+                    i.material-icons.right

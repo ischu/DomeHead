@@ -5,7 +5,7 @@ var path = require("path");
 var db = require("./models");
 
 var app = express();
-var PORT = process.env.PORT || 3000;
+var PORT = process.env.PORT || 8080;
 
 // Middleware
 app.use(express.urlencoded({ extended: false }));
@@ -21,7 +21,7 @@ require("./routes/author-api-routes")(app);
 require("./routes/story-api-routes")(app);
 require("./routes/htmlRoutes")(app);
 
-var syncOptions = { force: false };
+var syncOptions = { force: false, logging: console.log };
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
