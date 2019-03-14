@@ -116,19 +116,6 @@ var storySubmit = function (event) {
 
 };
 
-// var authorSubmit = function (event) {
-//   event.preventDefault();
-
-//   var example = {
-//     name: $("#createAuthor").val().trim(),
-//     // example- delete later
-//     password: "password"
-//   };
-
-//   AUTHOR.saveExample(example).then(function () {
-//     console.log("saveExampleAuthor");
-//   });
-// };
 
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -142,68 +129,6 @@ var handleDeleteBtnClick = function () {
     refreshExamples();
   });
 };
-
-//testing js functionality
-var playSubmit = function (event) {
-
-}
-
-// function hideCreateForm(){
-// $("#createForm").hide();
-// }
-
-function showCreateForm() {
-  $("#createForm").show();
-}
-
-// function hideLoginForm(){
-// $("#loginForm").hide();
-// }
-
-// function showLoginForm(){
-//   $("#loginForm").show();
-// }
-
-// function hideSignUpForm(){
-// $("#signUpForm").hide();
-// }
-
-// function showSignUpForm(){
-//   $("#signUpForm").show();
-// }
-
-// function hideSubmit(){
-//   $("#submit").hide();
-// }
-
-// function showSubmit() {
-//   $("#submit").show();
-// }
-
-// function hideSignUpButton(){
-//   $("#signup-button").hide();
-// }
-
-// function hideLoginButton(){
-//   $("#login-button").hide();
-// }
-
-// function hideLoginGet(){
-//   $("#loginGetButton").hide();
-// }
-
-// function showLoginGet(){
-//   $("#loginGetButton").show();
-// }
-
-// function hideSignUpPost(){
-//   $("#signUpPostButton").hide();
-// }
-
-// function showSignUpPost(){
-// $("#signUpPostButton").show();
-// }
-
 
 // Add event listeners to the submit and delete buttons
 $(document).ready(function () {
