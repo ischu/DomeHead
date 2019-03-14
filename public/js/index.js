@@ -105,7 +105,6 @@ $(document).ready(function () {
   $(".sidenav").sidenav();
   $("#submit").on("click", storySubmit);
   $('select').formSelect();
-  function playSubmit(){}
 
   $("#login-button").on("click", function () {
     // show login form
@@ -150,30 +149,41 @@ $(document).ready(function () {
       if (loginData.name === res.name && loginData.password === res.password){
         console.log("login successful");
         localStorage.setItem("LoggedAuthorId", res.id);
+        localStorage.setItem("LoggedAuthorName", res.name)
         $("#createForm").show();
         $("#submit").show();
+        $("#loginGetButton").hide();
+        $("#loginForm").hide();
+
+        var loginSuccess = $("<p>");
+        loginSuccess.text("You're Signed In As "+ localStorage.getItem("LoggedAuthorName"));
+        $("#createPage").append(loginSuccess);
       }else{
         console.log("login failed");
       }
     });
   });
 
-  function playSubmit(){
-  }
-  let hrefId = localStorage.getItem("LoggedAuthorId")
-  if (hrefId != null){
-  $("#viewMyStories").attr("href", "/stories/"+hrefId);
-  }
-  else {
-    $()
-  }
-  // create page loads with forms hidden
+
+  var AuthorName = localStorage.getItem("LoggedAuthorName");
+
+  if (AuthorName === null){
   $("#createForm").hide();
   $("#signUpForm").hide();
   $("#loginForm").hide();
   $("#submit").hide();
   $("#loginGetButton").hide();
   $("#signUpPostButton").hide();
+  }
+
+  if (AuthorName != null){
+    $("#loginForm").hide();
+    $("#signUpForm").hide();
+    $("#loginGetButton").hide();
+    $("#signUpPostButton").hide()
+    $("#login-button").hide();
+    $("#signup-button").hide();
+  }
 });
 
 

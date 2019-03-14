@@ -25,6 +25,7 @@ module.exports = function(app) {
       });
   });
 
+<<<<<<< HEAD
   app.get("authorsWork?id=", function(req, res){
     
     
@@ -40,6 +41,16 @@ module.exports = function(app) {
       });
     });
   });
+=======
+  // app.get("/stories/authorId", function(req, res){
+  //   }).then(function(dbExample) {
+  //     console.log(dbExample);
+  //     res.render("stories", {
+  //      stories: dbExample         
+  //     });
+  //   });
+  
+>>>>>>> da84e1d0611cd0526ba4e0782cdf6ef016d21ae2
 
   app.get("/write/:id", function(req, res){
     db.Story.findOne({
@@ -53,9 +64,9 @@ module.exports = function(app) {
     })
   });
 
-  app.get("/author", function(req, res){
+  app.get("/profile", function(req, res){
       db.Author.findAll({}).then(function(dbExample) {
-        res.render("author", {
+        res.render("profile", {
           authors: dbExample
         });
       });
