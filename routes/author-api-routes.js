@@ -23,12 +23,15 @@ module.exports = function(app) {
     }).then(function(dbAuthor) {
       if(dbAuthor === null){
         console.log("login failed");
-        return false;
+        return res.end();
+        
 
       } else {
         console.log("login successful");
         return res.json(dbAuthor);
       }
+
+      
     });
   });
 
