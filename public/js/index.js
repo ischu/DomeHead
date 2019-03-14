@@ -63,36 +63,35 @@ var STORY = {
 };
 
 // refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function () {
-  STORY.getExamples().then(function (data) {
-    var $examples = data.map(function (example) {
-      var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
+// var refreshExamples = function () {
+//   STORY.getExamples().then(function (data) {
+//     var $examples = data.map(function (example) {
+//       var $a = $("<a>")
+//         .text(example.text)
+//         .attr("href", "/example/" + example.id);
 
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": example.id
-        })
-        .append($a);
+//       var $li = $("<li>")
+//         .attr({
+//           class: "list-group-item",
+//           "data-id": example.id
+//         })
+//         .append($a);
 
-      var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
+//       var $button = $("<button>")
+//         .addClass("btn btn-danger float-right delete")
+//         .text("ｘ");
 
-      $li.append($button);
+//       $li.append($button);
 
-      return $li;
-    });
+//       return $li;
+//     });
 
-    $exampleList.empty();
-    $exampleList.append($examples);
-  });
-};
+//     $exampleList.empty();
+//     $exampleList.append($examples);
+//   });
+// };
 
-// storySubmit is called whenever we submit a new example
-// Save the new example to the db and refresh the list
+// storySubmit is called whenever we submit a new story
 var storySubmit = function (event) {
   event.preventDefault();
 
@@ -244,18 +243,21 @@ $(document).ready(function () {
     AUTHOR.saveExample(example);
     console.log("new author created");
   })
-
+  // LOGIN BUTTON
   $("#loginGetButton").on("click", function () {
     let loginData = {
       name: $("#loginName").val().trim(),
       password: $("#loginPassword").val().trim()
-    }
-    AUTHOR.getLogin(loginData.name, loginData.password).then(function CheckLogin() {
-      // if (loginData.name === res.name && loginData.password === res.password){
-      //   console.log("login successful")
-      // }
-    })
-  })
+    };
+    AUTHOR.getLogin(loginData.name, loginData.password).then(function(res) {
+      if (loginData.name === res.name && loginData.password === res.password){
+        console.log("login successful");
+        localStorage.setItem("LoggedAuthorId", res.id);
+      }else{
+        console.log("login failed");
+      }
+    });
+  });
 
   // create page loads with forms hidden
   $("#createForm").hide();
