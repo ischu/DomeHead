@@ -1,3 +1,5 @@
+console.log("js working");
+
 // The STORY object contains methods for each kind of request we'll make
 var AUTHOR = {
   saveExample: function (example) {
@@ -36,7 +38,7 @@ var AUTHOR = {
 };
 
 var STORY = {
-  saveStory: function (example) {
+  saveExample: function (example) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -46,13 +48,13 @@ var STORY = {
       data: JSON.stringify(example)
     });
   },
-  getStory: function (title) {
+  getExamples: function () {
     return $.ajax({
-      url: "api/stories?title="+title,
+      url: "api/stories",
       type: "GET"
     });
   },
-  deleteStory: function (id) {
+  deleteExample: function (id) {
     return $.ajax({
       url: "api/stories" + id,
       type: "DELETE"
@@ -72,51 +74,27 @@ var storySubmit = function (event) {
     title: titleVal,
     body: textVal,
     genre: genreVal,
-    AuthorId: storedId
+    AuthorId: storedId //EXAMPLE AUTHOR VARIABLE
   };
 
-  STORY.saveStory(example).then(function () {
+  STORY.saveExample(example).then(function () {
     console.log("saveExampleStory");
   });
+
+
 };
 
-var searchSubmit = function (){
-  $("#storiesPage").empty();
-  var searchBar = $("#search").val().trim();
-  STORY.getStory(searchBar).then(function(res){
-    
-    
-    for (var i = 0; i < res.length || i < 6; i++){
-      var cardSearchHolder = $("<div>");
-      cardSearchHolder.addClass("col s12 m6");
-      cardSearchHolder.attr("id", "storiesDisplay");
-      
-      var cardForSearch = $("<div>");
-      cardForSearch.addClass("card blue-grey darken-1");
-      var cardSearchContent = $("<div>");
-      cardSearchContent.addClass("card-content white-text");
-        
-      var cardSearchTitle = $("<a>");
-      cardSearchTitle.attr("href", "/write/"+res[i].id);
-      cardSearchTitle.addClass("card-title");
-      cardSearchTitle.attr("id", "storyLink");
-      cardSearchTitle.text(res[i].title);
-      cardSearchContent.append(cardSearchTitle);
 
-      var cardSearchAction = $("<div>");
-      cardSearchAction.addClass("card-action");
-      var cardSearchGenre = $("<a>");
-      cardSearchGenre.text(res[i].genre);
-      var cardSearchAuthor = $("<a>");
-      cardSearchAuthor.text(res[i].Author.name);
-      cardSearchAction.append(cardSearchGenre, cardSearchAuthor);
 
-      cardForSearch.append(cardSearchContent);
-      cardForSearch.append(cardSearchAction);
-          
-      cardSearchHolder.append(cardForSearch);
-      $("#storiesPage").append(cardSearchHolder);
-    }
+// handleDeleteBtnClick is called when an example's delete button is clicked
+// Remove the example from the db and refresh the list
+var handleDeleteBtnClick = function () {
+  var idToDelete = $(this)
+    .parent()
+    .attr("data-id");
+
+  STORY.deleteExample(idToDelete).then(function () {
+    refreshExamples();
   });
 };
 
@@ -124,7 +102,7 @@ var searchSubmit = function (){
 $(document).ready(function () {
   $(".sidenav").sidenav();
   $("#submit").on("click", storySubmit);
-  $("select").formSelect();
+  $('select').formSelect();
 
   $("#login-button").on("click", function () {
     // show login form
@@ -134,6 +112,7 @@ $(document).ready(function () {
     $("#signUpForm").hide();
     $("#signup-button").hide();
     $("#login-button").hide();
+
   });
 
   $("#signup-button").on("click", function () {
@@ -146,7 +125,6 @@ $(document).ready(function () {
     $("#signup-button").hide();
   });
   // SIGN UP BUTTON
-  
   // posts new author
   $("#signUpPostButton").on("click", function () {
     var example = {
@@ -154,8 +132,9 @@ $(document).ready(function () {
       password: $("#newPassword").val().trim()
     };
     AUTHOR.saveExample(example);
+    $("#signUpForm").hide();
+    $("#signUpPostButton").hide();
     $("#createForm").show();
-    $(".instructions").show();
     $("#submit").show();
     console.log("new author created");
   });
@@ -166,21 +145,20 @@ $(document).ready(function () {
       name: $("#loginName").val().trim(),
       password: $("#loginPassword").val().trim()
     };
-    AUTHOR.getLogin(loginData.name, loginData.password).then(function(res) {
-      if (loginData.name === res.name && loginData.password === res.password){
+    AUTHOR.getLogin(loginData.name, loginData.password).then(function (res) {
+      if (loginData.name === res.name && loginData.password === res.password) {
         console.log("login successful");
         localStorage.setItem("LoggedAuthorId", res.id);
-        localStorage.setItem("LoggedAuthorName", res.name);
+        localStorage.setItem("LoggedAuthorName", res.name)
         $("#createForm").show();
         $("#submit").show();
         $("#loginGetButton").hide();
         $("#loginForm").hide();
-        $(".instructions").show();
 
         var loginSuccess = $("<p>");
-        loginSuccess.text("You're Signed In As: "+ localStorage.getItem("LoggedAuthorName"));
+        loginSuccess.text("You're Signed In As " + localStorage.getItem("LoggedAuthorName"));
         $("#createPage").append(loginSuccess);
-      }else{
+      } else {
         console.log("login failed");
       }
     });
@@ -189,9 +167,8 @@ $(document).ready(function () {
 
   var AuthorName = localStorage.getItem("LoggedAuthorName");
 
-  if (AuthorName === null){
+  if (AuthorName === null) {
     $("#createForm").hide();
-    $(".instructions").hide();
     $("#signUpForm").hide();
     $("#loginForm").hide();
     $("#submit").hide();
@@ -199,23 +176,14 @@ $(document).ready(function () {
     $("#signUpPostButton").hide();
   }
 
-  if (AuthorName !== null){
+  if (AuthorName != null) {
     $("#loginForm").hide();
     $("#signUpForm").hide();
     $("#loginGetButton").hide();
-    $("#signUpPostButton").hide();
+    $("#signUpPostButton").hide()
     $("#login-button").hide();
     $("#signup-button").hide();
-    
   }
-  
-  $("#search").on("keypress", function (event) {
-    // Number 13 is the "Enter" key on the keyboard
-    if (event.which === 13) {
-      searchSubmit();
-      
-    }
-  });
 });
 
 
