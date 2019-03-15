@@ -1,6 +1,6 @@
 $(function() {
   console.log(storyBody);
-  storyBody.match(/\[(\w+)\]/gi).forEach((w) => {
+  storyBody.match(/\[([\w+ ]+)\]/gi).forEach((w) => {
     $("#storyForm").append('<input type ="text" placeholder ="'+w+'"/>');
   });
   $("#storyForm").append('<button class="waves-effect waves-light btn" id = "write_story_button"> Write Story </button>');

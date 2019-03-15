@@ -1,4 +1,4 @@
-console.log("js working")
+console.log("js working");
 
 // The STORY object contains methods for each kind of request we'll make
 var AUTHOR = {
@@ -62,35 +62,6 @@ var STORY = {
   }
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
-// var refreshExamples = function () {
-//   STORY.getExamples().then(function (data) {
-//     var $examples = data.map(function (example) {
-//       var $a = $("<a>")
-//         .text(example.text)
-//         .attr("href", "/example/" + example.id);
-
-//       var $li = $("<li>")
-//         .attr({
-//           class: "list-group-item",
-//           "data-id": example.id
-//         })
-//         .append($a);
-
-//       var $button = $("<button>")
-//         .addClass("btn btn-danger float-right delete")
-//         .text("ｘ");
-
-//       $li.append($button);
-
-//       return $li;
-//     });
-
-//     $exampleList.empty();
-//     $exampleList.append($examples);
-//   });
-// };
-
 // storySubmit is called whenever we submit a new story
 var storySubmit = function (event) {
   event.preventDefault();
@@ -109,9 +80,6 @@ var storySubmit = function (event) {
   STORY.saveStory(example).then(function () {
     console.log("saveExampleStory");
   });
-
-  $("#title").val("");
-  $("#text").val("");
 
 };
 
@@ -206,6 +174,7 @@ $(document).ready(function () {
     };
     AUTHOR.saveExample(example);
     $("#createForm").show();
+    $(".instructions").show();
     $("#submit").show();
     console.log("new author created");
   });
@@ -240,6 +209,7 @@ $(document).ready(function () {
 
   if (AuthorName === null){
   $("#createForm").hide();
+  $(".instructions").hide();
   $("#signUpForm").hide();
   $("#loginForm").hide();
   $("#submit").hide();
