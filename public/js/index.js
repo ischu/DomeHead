@@ -88,10 +88,12 @@ var searchSubmit = function (){
   var searchBar = $("#search").val().trim()
   STORY.getStory(searchBar).then(function(res){
     console.log(res)
-    var cardSearchHolder = $("<div>")
-    cardSearchHolder.addClass("col s12 m6")
+    
     
     for (var i = 0; i < res.length || i < 6; i++){
+      var cardSearchHolder = $("<div>")
+    cardSearchHolder.addClass("col s12 m6")
+    cardSearchHolder.attr("id", "storiesDisplay")
       console.log(res[i])
       var cardForSearch = $("<div>")
       cardForSearch.addClass("card blue-grey darken-1")
@@ -101,6 +103,7 @@ var searchSubmit = function (){
           var cardSearchTitle = $("<a>");
           cardSearchTitle.attr("href", "/write/"+res[i].id)
           cardSearchTitle.addClass("card-title")
+          cardSearchTitle.attr("id", "storyLink")
           cardSearchTitle.text(res[i].title);
           cardSearchContent.append(cardSearchTitle);
 
@@ -111,10 +114,10 @@ var searchSubmit = function (){
             var cardSearchAuthor = $("<a>")
               cardSearchAuthor.text(res[i].Author.name)
           cardSearchAction.append(cardSearchGenre, cardSearchAuthor);
-          // cardSearchContent.append(cardSearchAction)
+
           cardForSearch.append(cardSearchContent);
           cardForSearch.append(cardSearchAction)
-          cardForSearch.attr("id", "storiesDisplay")
+          
       cardSearchHolder.append(cardForSearch);
     $("#storiesPage").append(cardSearchHolder);
 
