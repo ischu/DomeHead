@@ -132,6 +132,7 @@ $(document).ready(function () {
     };
     AUTHOR.saveExample(example);
     $("#createForm").show();
+    $(".instructions").show();
     $("#submit").show();
     console.log("new author created");
   });
@@ -166,6 +167,7 @@ $(document).ready(function () {
 
   if (AuthorName === null){
   $("#createForm").hide();
+  $(".instructions").hide();
   $("#signUpForm").hide();
   $("#loginForm").hide();
   $("#submit").hide();

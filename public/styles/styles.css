@@ -72,6 +72,19 @@ h5 {
   padding:0;
 }
 
+.instructions {
+  width: 80%;
+  margin: auto;
+  color: rgb(45, 101, 153, 0.7);
+}
+
+#introduction {
+  font-family: "Teko", sans-serif;
+  font-size: 30px;
+  color: rgb(45, 101, 153, 0.7);
+  margin: auto;
+}
+
 input[type=text] {
   color: rgb(45, 101, 153, 0.5) !important;
 }
@@ -106,7 +119,6 @@ span {
   width: 80%;
   margin:auto;
   padding-top: 10px;
-
 }
 
 #search:focus {
@@ -187,6 +199,10 @@ span {
 #write_story_button{
   margin-left: 15px;
   margin-top: 10px;
+}
+
+#write_story_button:active {
+  background-color:#f9df60;
 }
 
 #viewMyStories {
