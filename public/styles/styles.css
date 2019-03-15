@@ -82,7 +82,12 @@ h5 {
   font-family: "Teko", sans-serif;
   font-size: 30px;
   color: rgb(45, 101, 153, 0.7);
-  margin: auto;
+  padding: 20px;
+}
+
+#homeP{
+  margin-top:0;
+  margin-bottom:auto;
 }
 
 input[type=text] {
@@ -132,10 +137,6 @@ span {
   margin-top: 22px;
 }
 
-#introduction {
-  padding: 10px;
-  margin: auto;
-}
 
 #createPage {
   margin: 15px;
