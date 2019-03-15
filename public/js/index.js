@@ -38,7 +38,7 @@ var AUTHOR = {
 };
 
 var STORY = {
-  saveExample: function (example) {
+  saveStory: function (example) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
@@ -48,13 +48,13 @@ var STORY = {
       data: JSON.stringify(example)
     });
   },
-  getExamples: function () {
+  getStory: function (title) {
     return $.ajax({
-      url: "api/stories",
+      url: "api/stories?title="+title,
       type: "GET"
     });
   },
-  deleteExample: function (id) {
+  deleteStory: function (id) {
     return $.ajax({
       url: "api/stories" + id,
       type: "DELETE"
@@ -103,18 +103,59 @@ var storySubmit = function (event) {
     title: titleVal,
     body: textVal,
     genre: genreVal,
-    AuthorId: storedId //EXAMPLE AUTHOR VARIABLE
+    AuthorId: storedId
   };
 
-  STORY.saveExample(example).then(function () {
+  STORY.saveStory(example).then(function () {
     console.log("saveExampleStory");
-    refreshExamples();
   });
 
   $("#title").val("");
   $("#text").val("");
 
 };
+
+var searchSubmit = function (){
+  $("#storiesPage").empty();
+  var searchBar = $("#search").val().trim()
+  STORY.getStory(searchBar).then(function(res){
+    console.log(res)
+    var cardSearchHolder = $("<div>")
+    cardSearchHolder.addClass("col s12 m6")
+    
+    for (var i = 0; i < res.length || i < 6; i++){
+      console.log(res[i])
+      var cardForSearch = $("<div>")
+      cardForSearch.addClass("card blue-grey darken-1")
+        var cardSearchContent = $("<div>")
+        cardSearchContent.addClass("card-content white-text")
+        
+          var cardSearchTitle = $("<a>");
+          cardSearchTitle.attr("href", "/write/"+res[i].id)
+          cardSearchTitle.addClass("card-title")
+          cardSearchTitle.text(res[i].title);
+          cardSearchContent.append(cardSearchTitle);
+
+          var cardSearchAction = $("<div>")
+          cardSearchAction.addClass("card-action")
+            var cardSearchGenre = $("<a>")
+              cardSearchGenre.text(res[i].genre)
+            var cardSearchAuthor = $("<a>")
+              cardSearchAuthor.text(res[i].Author.name)
+          cardSearchAction.append(cardSearchGenre, cardSearchAuthor);
+          // cardSearchContent.append(cardSearchAction)
+          cardForSearch.append(cardSearchContent);
+          cardForSearch.append(cardSearchAction)
+          cardForSearch.attr("id", "storiesDisplay")
+      cardSearchHolder.append(cardForSearch);
+    $("#storiesPage").append(cardSearchHolder);
+
+
+    }
+  })
+  
+
+}
 
 
 
@@ -125,8 +166,8 @@ var handleDeleteBtnClick = function () {
     .parent()
     .attr("data-id");
 
-  STORY.deleteExample(idToDelete).then(function () {
-    refreshExamples();
+  STORY.deleteStory(idToDelete).then(function () {
+    
   });
 };
 
@@ -144,7 +185,6 @@ $(document).ready(function () {
     $("#signUpForm").hide();
     $("#signup-button").hide();
     $("#login-button").hide();
-
   });
 
   $("#signup-button").on("click", function () {
@@ -157,6 +197,7 @@ $(document).ready(function () {
     $("#signup-button").hide();
   });
   // SIGN UP BUTTON
+  
   // posts new author
   $("#signUpPostButton").on("click", function () {
     var example = {
@@ -214,6 +255,14 @@ $(document).ready(function () {
     $("#login-button").hide();
     $("#signup-button").hide();
   }
+  
+  $("#search").on("keypress", function (event) {
+    // Number 13 is the "Enter" key on the keyboard
+    if (event.which === 13) {
+      searchSubmit();
+      
+    }
+  });
 });
 
 
