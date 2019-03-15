@@ -16,7 +16,9 @@ module.exports = function(sequelize, DataTypes) {
       validate: {
         // minimum length 50 characters, maximum length 5000 characters
         // CHANGED MINIMUM TO 1 FOR TESTING PURPOSES- CHANGE BACK LATER!
-        len: [1, 5000]
+        len: [1, 5000],
+        contains: "[",
+        contains: "]"
       }
     },
     genre: {
