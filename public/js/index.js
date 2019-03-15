@@ -1,5 +1,3 @@
-console.log("js working");
-
 // The STORY object contains methods for each kind of request we'll make
 var AUTHOR = {
   saveExample: function (example) {
@@ -80,65 +78,45 @@ var storySubmit = function (event) {
   STORY.saveStory(example).then(function () {
     console.log("saveExampleStory");
   });
-
 };
 
 var searchSubmit = function (){
   $("#storiesPage").empty();
-  var searchBar = $("#search").val().trim()
+  var searchBar = $("#search").val().trim();
   STORY.getStory(searchBar).then(function(res){
-    console.log(res)
     
     
     for (var i = 0; i < res.length || i < 6; i++){
       var cardSearchHolder = $("<div>")
-    cardSearchHolder.addClass("col s12 m6")
-    cardSearchHolder.attr("id", "storiesDisplay")
-      console.log(res[i])
+      cardSearchHolder.addClass("col s12 m6")
+      cardSearchHolder.attr("id", "storiesDisplay")
+      
       var cardForSearch = $("<div>")
       cardForSearch.addClass("card blue-grey darken-1")
-        var cardSearchContent = $("<div>")
-        cardSearchContent.addClass("card-content white-text")
+      var cardSearchContent = $("<div>")
+      cardSearchContent.addClass("card-content white-text")
         
-          var cardSearchTitle = $("<a>");
-          cardSearchTitle.attr("href", "/write/"+res[i].id)
-          cardSearchTitle.addClass("card-title")
-          cardSearchTitle.attr("id", "storyLink")
-          cardSearchTitle.text(res[i].title);
-          cardSearchContent.append(cardSearchTitle);
+      var cardSearchTitle = $("<a>");
+      cardSearchTitle.attr("href", "/write/"+res[i].id);
+      cardSearchTitle.addClass("card-title");
+      cardSearchTitle.attr("id", "storyLink");
+      cardSearchTitle.text(res[i].title);
+      cardSearchContent.append(cardSearchTitle);
 
-          var cardSearchAction = $("<div>")
-          cardSearchAction.addClass("card-action")
-            var cardSearchGenre = $("<a>")
-              cardSearchGenre.text(res[i].genre)
-            var cardSearchAuthor = $("<a>")
-              cardSearchAuthor.text(res[i].Author.name)
-          cardSearchAction.append(cardSearchGenre, cardSearchAuthor);
+      var cardSearchAction = $("<div>");
+      cardSearchAction.addClass("card-action");
+      var cardSearchGenre = $("<a>");
+      cardSearchGenre.text(res[i].genre);
+      var cardSearchAuthor = $("<a>");
+      cardSearchAuthor.text(res[i].Author.name);
+      cardSearchAction.append(cardSearchGenre, cardSearchAuthor);
 
-          cardForSearch.append(cardSearchContent);
-          cardForSearch.append(cardSearchAction)
+      cardForSearch.append(cardSearchContent);
+      cardForSearch.append(cardSearchAction);
           
       cardSearchHolder.append(cardForSearch);
-    $("#storiesPage").append(cardSearchHolder);
-
-
+      $("#storiesPage").append(cardSearchHolder);
     }
-  })
-  
-
-}
-
-
-
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function () {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
-
-  STORY.deleteStory(idToDelete).then(function () {
-    
   });
 };
 
@@ -146,7 +124,7 @@ var handleDeleteBtnClick = function () {
 $(document).ready(function () {
   $(".sidenav").sidenav();
   $("#submit").on("click", storySubmit);
-  $('select').formSelect();
+  $("select").formSelect();
 
   $("#login-button").on("click", function () {
     // show login form
@@ -211,20 +189,20 @@ $(document).ready(function () {
   var AuthorName = localStorage.getItem("LoggedAuthorName");
 
   if (AuthorName === null){
-  $("#createForm").hide();
-  $(".instructions").hide();
-  $("#signUpForm").hide();
-  $("#loginForm").hide();
-  $("#submit").hide();
-  $("#loginGetButton").hide();
-  $("#signUpPostButton").hide();
+    $("#createForm").hide();
+    $(".instructions").hide();
+    $("#signUpForm").hide();
+    $("#loginForm").hide();
+    $("#submit").hide();
+    $("#loginGetButton").hide();
+    $("#signUpPostButton").hide();
   }
 
-  if (AuthorName != null){
+  if (AuthorName !== null){
     $("#loginForm").hide();
     $("#signUpForm").hide();
     $("#loginGetButton").hide();
-    $("#signUpPostButton").hide()
+    $("#signUpPostButton").hide();
     $("#login-button").hide();
     $("#signup-button").hide();
   }
