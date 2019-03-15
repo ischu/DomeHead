@@ -37,7 +37,7 @@ block create
                         .input-field.col.m6.s5
                             input#title.validate(placeholder="Title", type='text', minlength="5", maxlength="40", required, aria-required="true")
                             label(for='title') Story Title
-                            span#titleHelper.helper-text(data-error="Every story needs a title!")
+                            span#titleHelper.helper-text(data-error="Every story needs a title")
 
                 
                         .input-field.col.m6.s5
@@ -47,7 +47,7 @@ block create
                                 option(value='Comedy') Comedy
                                 option(value='Scary') Scary
                             label Pick your Genre
-                            span.helper-text(data-error="Don't forget to chose a genre!")
+                            span#genreHelper.helper-text(data-error="Don't forget to chose a genre")
 
 
                 #textDiv
@@ -57,7 +57,7 @@ block create
                             .input-field.col.s12
                                 textarea#text.materialize-textarea.validate(placeholder="Text" data-length="5000", maxlength="5000", required, aria-required="true")
                                 label(for='textarea1') Your Story Here
-                                span.helper-text(data-error="You're story can't be blank!")
+                                span#textHelper.helper-text(data-error="Your story can't be blank")
 
 
 

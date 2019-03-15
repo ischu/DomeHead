@@ -3,13 +3,15 @@ const setHelperText = function (id, message) {
   $(id).attr("data-error", message);
 };
 
+$("select[required]").css({display: "block", height: 0, padding: 0, width: 0, position: 'absolute'});
+
 const validate = {
 
   // TITLE VALIDATION
   title: () => {
     //If title is incorrect length or has invalid characters, it will not submit
     let titleVal = $("#title").val().trim();
-    let wordSpaceRegEx= /[\w ]/g;
+    let wordSpaceRegEx= /[^\w ]/ig;
 
     if (titleVal === "") {
       setHelperText("#titleHelper", "Title cannot be blank");
@@ -20,7 +22,8 @@ const validate = {
       setHelperText("#titleHelper", "Title cannot be longer than 40 characters");
     }
     // checks there are no invalid characters
-    else if (wordSpaceRegEx.exec(titleVal)!==null) {
+    else if (wordSpaceRegEx.test(titleVal)) {
+      console.log(wordSpaceRegEx.test(titleVal));
       $("#title").addClass("invalid");
       setHelperText("#titleHelper", "Title may only contain letters, numbers, and spaces");
     } else {
@@ -32,10 +35,11 @@ const validate = {
   // GENRE VALIDATION
   genre: () => {
     let genreVal= $("#genre").val();
-
+    console.log(genreVal);
     // Cannot be blank
-    if (genreVal === null) {
+    if (genreVal === "Genre") {
       $("#genre").addClass("invalid");
+      console.log("invalid");
     } else {
       $("#genre").removeClass("invalid");
       $("#genre").addClass("valid");

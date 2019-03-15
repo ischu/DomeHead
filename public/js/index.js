@@ -81,9 +81,6 @@ var storySubmit = function (event) {
     console.log("saveExampleStory");
   });
 
-  $("#title").val("");
-  $("#text").val("");
-
 };
 
 
