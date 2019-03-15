@@ -191,8 +191,8 @@ span {
 #storiesDisplay{
   margin:auto;
   margin-bottom: 30px;
-  float: left;
   width:50%;
+  float: left;
   word-wrap: break-word;
 }
 

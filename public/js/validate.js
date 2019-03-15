@@ -3,7 +3,7 @@ const setHelperText = function (id, message) {
   $(id).attr("data-error", message);
 };
 
-$("select[required]").css({display: "block", height: 0, padding: 0, width: 0, position: 'absolute'});
+$("select[required]").css({display: "block", height: 0, padding: 0, width: 0, position: "absolute"});
 
 const validate = {
 
