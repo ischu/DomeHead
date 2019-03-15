@@ -87,14 +87,14 @@ var searchSubmit = function (){
     
     
     for (var i = 0; i < res.length || i < 6; i++){
-      var cardSearchHolder = $("<div>")
-      cardSearchHolder.addClass("col s12 m6")
-      cardSearchHolder.attr("id", "storiesDisplay")
+      var cardSearchHolder = $("<div>");
+      cardSearchHolder.addClass("col s12 m6");
+      cardSearchHolder.attr("id", "storiesDisplay");
       
-      var cardForSearch = $("<div>")
-      cardForSearch.addClass("card blue-grey darken-1")
-      var cardSearchContent = $("<div>")
-      cardSearchContent.addClass("card-content white-text")
+      var cardForSearch = $("<div>");
+      cardForSearch.addClass("card blue-grey darken-1");
+      var cardSearchContent = $("<div>");
+      cardSearchContent.addClass("card-content white-text");
         
       var cardSearchTitle = $("<a>");
       cardSearchTitle.attr("href", "/write/"+res[i].id);
@@ -170,14 +170,15 @@ $(document).ready(function () {
       if (loginData.name === res.name && loginData.password === res.password){
         console.log("login successful");
         localStorage.setItem("LoggedAuthorId", res.id);
-        localStorage.setItem("LoggedAuthorName", res.name)
+        localStorage.setItem("LoggedAuthorName", res.name);
         $("#createForm").show();
         $("#submit").show();
         $("#loginGetButton").hide();
         $("#loginForm").hide();
+        $(".instructions").show();
 
         var loginSuccess = $("<p>");
-        loginSuccess.text("You're Signed In As "+ localStorage.getItem("LoggedAuthorName"));
+        loginSuccess.text("You're Signed In As: "+ localStorage.getItem("LoggedAuthorName"));
         $("#createPage").append(loginSuccess);
       }else{
         console.log("login failed");
@@ -205,6 +206,7 @@ $(document).ready(function () {
     $("#signUpPostButton").hide();
     $("#login-button").hide();
     $("#signup-button").hide();
+    
   }
   
   $("#search").on("keypress", function (event) {
