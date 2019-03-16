@@ -40,7 +40,7 @@ block create
                 #titleGenreDiv
                     .row#titleGenreRow
                         .input-field.col.m6.s5
-                            input#title.validate(placeholder="Title", type='text', minlength="5", maxlength="40", required, aria-required="true")
+                            input#title.validate(placeholder="Title", type='text', minlength="5", maxlength="40", required, aria-required="true", autocomplete="off")
                             label(for='title') Story Title
                             span#titleHelper.helper-text(data-error="Every story needs a title")
 
