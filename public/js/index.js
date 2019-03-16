@@ -74,7 +74,7 @@ var storySubmit = function (event) {
     title: titleVal,
     body: textVal,
     genre: genreVal,
-    AuthorId: storedId //EXAMPLE AUTHOR VARIABLE
+    AuthorId: storedId
   };
 
   STORY.saveExample(example).then(function () {
@@ -127,15 +127,24 @@ $(document).ready(function () {
   // SIGN UP BUTTON
   // posts new author
   $("#signUpPostButton").on("click", function () {
-    var example = {
+    var newAuthor = {
       name: $("#newName").val().trim(),
       password: $("#newPassword").val().trim()
     };
-    AUTHOR.saveExample(example);
+    AUTHOR.saveExample(newAuthor).then(function ()
+    // gets newly created object for id
+    {
+      AUTHOR.getLogin(newAuthor.name, newAuthor.password).then(function (res) {
+        localStorage.setItem("LoggedAuthorId", res.id);
+        localStorage.setItem("LoggedAuthorName", res.name);
+      })
+    }
+    );
     $("#signUpForm").hide();
     $("#signUpPostButton").hide();
     $("#createForm").show();
     $("#submit").show();
+    $(".instructions").show();
     console.log("new author created");
   });
   // LOGIN BUTTON
@@ -154,7 +163,7 @@ $(document).ready(function () {
         $("#submit").show();
         $("#loginGetButton").hide();
         $("#loginForm").hide();
-
+        $(".instructions").show();
         var loginSuccess = $("<p>");
         loginSuccess.text("You're Signed In As " + localStorage.getItem("LoggedAuthorName"));
         $("#createPage").append(loginSuccess);
@@ -168,6 +177,7 @@ $(document).ready(function () {
   var AuthorName = localStorage.getItem("LoggedAuthorName");
 
   if (AuthorName === null) {
+    $(".instructions").hide();
     $("#createForm").hide();
     $("#signUpForm").hide();
     $("#loginForm").hide();
