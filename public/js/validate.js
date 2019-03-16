@@ -49,7 +49,7 @@ const validate = {
   // STORY VALIDATION
   text: () => {
     let textVal= $("#text").val().trim();
-    let bracketsRegEx = /\[(\w+)\]/gi;
+    let bracketsRegEx = /\[([\w+ ]+)\]/gi;
     // If text is incorrect length, it will not submit
 
     if (textVal === "") {
@@ -85,7 +85,7 @@ const validate = {
       setHelperText("#nameHelper", "Name must be at least 3 characters long");
     } else if (authorVal.length >= 20) {
       $("#newName").addClass("invalid");
-      setHelperText("#nameHelper", "Title cannot be longer than 20 characters");
+      setHelperText("#nameHelper", "Name cannot be longer than 20 characters");
     }
     // checks for invalid characters
     else if (NonWordRegEx.test(authorVal)) {
