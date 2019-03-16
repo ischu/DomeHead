@@ -137,13 +137,15 @@ $(document).ready(function () {
       AUTHOR.getLogin(newAuthor.name, newAuthor.password).then(function (res) {
         localStorage.setItem("LoggedAuthorId", res.id);
         localStorage.setItem("LoggedAuthorName", res.name);
+        var loginSuccess = $("<p>");
+        loginSuccess.attr("id", "SuccessText");
+        loginSuccess.text("You're Signed In As: " + localStorage.getItem("LoggedAuthorName"));
+        $("#createPage").append(loginSuccess);
       });
     }
     );
-    var loginSuccess = $("<p>");
-    loginSuccess.attr("id", "SuccessText");
-    loginSuccess.text("You're Signed In As: " + localStorage.getItem("LoggedAuthorName"));
-    $("#createPage").append(loginSuccess);
+    
+    
     $("#signUpForm").hide();
     $("#signUpPostButton").hide();
     $("#createForm").show();
