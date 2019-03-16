@@ -64,8 +64,10 @@ const validate = {
       setHelperText("#textHelper", "Make sure to include [word]s in your story!");
       $("#text").addClass("invalid");
     } else {
+      setHelperText("#textHelper", "Story Submitted!");
       $("#text").removeClass("invalid");
       $("#text").addClass("valid");
+      $("#text").val("");
     }
   },
   // AUTHOR VALIDATION
