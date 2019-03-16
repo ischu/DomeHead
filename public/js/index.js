@@ -68,12 +68,12 @@ var storySubmit = function (event) {
   let storedId = localStorage.getItem("LoggedAuthorId");
   let titleVal = $("#title").val().trim();
   let textVal = $("#text").val().trim();
-  let genreVal = $("#genre").val();
+  // let genreVal = $("#genre").val();
   // JSON obj to be submitted
   let example = {
     title: titleVal,
     body: textVal,
-    genre: genreVal,
+    // genre: "Drama",
     AuthorId: storedId
   };
 
@@ -109,11 +109,13 @@ var searchSubmit = function () {
 
       var cardSearchAction = $("<div>");
       cardSearchAction.addClass("card-action");
-      var cardSearchGenre = $("<a>");
-      cardSearchGenre.text(res[i].genre);
+      // var cardSearchGenre = $("<a>");
+      // cardSearchGenre.text(res[i].genre);
       var cardSearchAuthor = $("<a>");
       cardSearchAuthor.text(res[i].Author.name);
-      cardSearchAction.append(cardSearchGenre, cardSearchAuthor);
+      cardSearchAction.append(
+        // cardSearchGenre, 
+        cardSearchAuthor);
 
       cardForSearch.append(cardSearchContent);
       cardForSearch.append(cardSearchAction);
