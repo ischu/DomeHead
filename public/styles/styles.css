@@ -2,6 +2,11 @@
   line-height: 2.5;
 }
 
+#SuccessText{
+ padding:12px;
+ color: rgb(45, 101, 153, 0.7);
+}
+
 body {
   background-image: url(../images/alphabet-communication-data-256798.jpg);
   background-size: cover;
