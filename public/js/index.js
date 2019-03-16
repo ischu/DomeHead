@@ -50,7 +50,7 @@ var STORY = {
   },
   getExamples: function (title) {
     return $.ajax({
-      url: "api/stories/?title="+title,
+      url: "api/stories?title="+title,
       type: "GET"
     });
   },
@@ -89,8 +89,8 @@ var searchSubmit = function () {
   $("#storiesPage").empty();
   var searchBar = $("#search").val().trim();
   STORY.getExamples(searchBar).then(function (res) {
-
-    for (var i = 0; i < res.length || i < 6; i++) {
+    // removed || i<6, it was causing an error
+    for (var i = 0; i < res.length; i++) {
       var cardSearchHolder = $("<div>")
       cardSearchHolder.addClass("col s12 m6")
       cardSearchHolder.attr("id", "storiesDisplay")
