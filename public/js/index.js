@@ -132,7 +132,7 @@ $(document).ready(function () {
       password: $("#newPassword").val().trim()
     };
     AUTHOR.saveExample(newAuthor).then(function ()
-    // gets newly created object for id
+    // gets newly created object so id can be stored locally
     {
       AUTHOR.getLogin(newAuthor.name, newAuthor.password).then(function (res) {
         localStorage.setItem("LoggedAuthorId", res.id);
@@ -175,6 +175,8 @@ $(document).ready(function () {
         loginSuccess.text("You're Signed In As: " + localStorage.getItem("LoggedAuthorName"));
         $("#createPage").append(loginSuccess);
       } else {
+        $("#loginName").addClass("invalid");
+        $("#loginPassword").addClass("invalid");
         console.log("login failed");
       }
     });

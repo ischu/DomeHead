@@ -6,11 +6,11 @@ block create
             form.col.s6#loginForm
                     h6 Author Login
                     .input-field.col.s6
-                        input#loginName.validate(placeholder='Name', type='text')
+                        input#loginName.validate(placeholder='Name', type='text', required, aria-required="true")
                         label(for='login_name') Name
                         span#loginHelper.helper-text(data-error="Username or password is incorrect")
                     .input-field.col.s6
-                        input#loginPassword.validate(placeholder="Password", type='text')
+                        input#loginPassword.validate(placeholder="Password", type='text', required, aria-required="true")
                         label(for='password') Password
             form.col.s6#signUpForm
                     h6 New Authors
