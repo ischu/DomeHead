@@ -48,9 +48,9 @@ var STORY = {
       data: JSON.stringify(example)
     });
   },
-  getExamples: function () {
+  getExamples: function (title) {
     return $.ajax({
-      url: "api/stories",
+      url: "api/stories/?title="+title,
       type: "GET"
     });
   },
@@ -84,26 +84,56 @@ var storySubmit = function (event) {
 
 };
 
+// search function
+var searchSubmit = function () {
+  $("#storiesPage").empty();
+  var searchBar = $("#search").val().trim();
+  STORY.getExamples(searchBar).then(function (res) {
 
+    for (var i = 0; i < res.length || i < 6; i++) {
+      var cardSearchHolder = $("<div>")
+      cardSearchHolder.addClass("col s12 m6")
+      cardSearchHolder.attr("id", "storiesDisplay")
 
-// handleDeleteBtnClick is called when an example's delete button is clicked
-// Remove the example from the db and refresh the list
-var handleDeleteBtnClick = function () {
-  var idToDelete = $(this)
-    .parent()
-    .attr("data-id");
+      var cardForSearch = $("<div>")
+      cardForSearch.addClass("card blue-grey darken-1")
+      var cardSearchContent = $("<div>")
+      cardSearchContent.addClass("card-content white-text")
 
-  STORY.deleteExample(idToDelete).then(function () {
-    refreshExamples();
+      var cardSearchTitle = $("<a>");
+      cardSearchTitle.attr("href", "/write/" + res[i].id);
+      cardSearchTitle.addClass("card-title");
+      cardSearchTitle.attr("id", "storyLink");
+      cardSearchTitle.text(res[i].title);
+      cardSearchContent.append(cardSearchTitle);
+
+      var cardSearchAction = $("<div>");
+      cardSearchAction.addClass("card-action");
+      var cardSearchGenre = $("<a>");
+      cardSearchGenre.text(res[i].genre);
+      var cardSearchAuthor = $("<a>");
+      cardSearchAuthor.text(res[i].Author.name);
+      cardSearchAction.append(cardSearchGenre, cardSearchAuthor);
+
+      cardForSearch.append(cardSearchContent);
+      cardForSearch.append(cardSearchAction);
+
+      cardSearchHolder.append(cardForSearch);
+      $("#storiesPage").append(cardSearchHolder);
+    };
   });
 };
 
-// Add event listeners to the submit and delete buttons
+// button functions
 $(document).ready(function () {
-  $(".sidenav").sidenav();
   $("#submit").on("click", storySubmit);
-  $('select').formSelect();
 
+$("#search").on("keypress", function (event) {
+  // Number 13 is the "Enter" key on the keyboard
+  if (event.which === 13) {
+    searchSubmit();
+  }
+});
   $("#login-button").on("click", function () {
     // show login form
     $("#loginForm").show();
@@ -134,9 +164,9 @@ $(document).ready(function () {
     // checks if username is already in use
     AUTHOR.getName(newAuthor.name).then(function (res) {
       if (res) {
-      $("#newName").addClass("invalid");
-      setHelperText("#nameHelper", "Sorry, this author name is already taken!");
-      } 
+        $("#newName").addClass("invalid");
+        setHelperText("#nameHelper", "Sorry, this author name is already taken!");
+      }
       else {
         AUTHOR.saveExample(newAuthor).then(function ()
         // gets newly created object so id can be stored locally
@@ -150,63 +180,64 @@ $(document).ready(function () {
             $("#createPage").append(loginSuccess);
           });
         });
-      $("#signUpForm").hide();
-      $("#signUpPostButton").hide();
-      $("#createForm").show();
-      $("#submit").show();
-      $(".instructions").show();
-      console.log("new author created");
-    };
-    });
-  });
-    // LOGIN BUTTON
-    // gets existing author id, stores it locally
-    $("#loginGetButton").on("click", function () {
-      let loginData = {
-        name: $("#loginName").val().trim(),
-        password: $("#loginPassword").val().trim()
+        $("#signUpForm").hide();
+        $("#signUpPostButton").hide();
+        $("#createForm").show();
+        $("#submit").show();
+        $(".instructions").show();
+        console.log("new author created");
       };
-      AUTHOR.getLogin(loginData.name, loginData.password).then(function (res) {
-        if (loginData.name === res.name && loginData.password === res.password) {
-          console.log("login successful");
-          localStorage.setItem("LoggedAuthorId", res.id);
-          localStorage.setItem("LoggedAuthorName", res.name)
-          $("#createForm").show();
-          $("#submit").show();
-          $("#loginGetButton").hide();
-          $("#loginForm").hide();
-          $(".instructions").show();
-          var loginSuccess = $("<p>");
-          loginSuccess.attr("id", "SuccessText");
-          loginSuccess.text("You're Signed In As: " + localStorage.getItem("LoggedAuthorName"));
-          $("#createPage").append(loginSuccess);
-        } else {
-          $("#loginName").addClass("invalid");
-          $("#loginPassword").addClass("invalid");
-          console.log("login failed");
-        }
-      });
     });
-
-
-    var AuthorName = localStorage.getItem("LoggedAuthorName");
-
-    if (AuthorName === null) {
-      $(".instructions").hide();
-      $("#createForm").hide();
-      $("#signUpForm").hide();
-      $("#loginForm").hide();
-      $("#submit").hide();
-      $("#loginGetButton").hide();
-      $("#signUpPostButton").hide();
-    }
-
-    if (AuthorName != null) {
-      $("#loginForm").hide();
-      $("#signUpForm").hide();
-      $("#loginGetButton").hide();
-      $("#signUpPostButton").hide()
-      $("#login-button").hide();
-      $("#signup-button").hide();
-    }
   });
+  // LOGIN BUTTON
+  // gets existing author id, stores it locally
+  $("#loginGetButton").on("click", function () {
+    let loginData = {
+      name: $("#loginName").val().trim(),
+      password: $("#loginPassword").val().trim()
+    };
+    AUTHOR.getLogin(loginData.name, loginData.password).then(function (res) {
+      if (loginData.name === res.name && loginData.password === res.password) {
+        console.log("login successful");
+        localStorage.setItem("LoggedAuthorId", res.id);
+        localStorage.setItem("LoggedAuthorName", res.name)
+        $("#createForm").show();
+        $("#submit").show();
+        $("#loginGetButton").hide();
+        $("#loginForm").hide();
+        $(".instructions").show();
+        var loginSuccess = $("<p>");
+        loginSuccess.attr("id", "SuccessText");
+        loginSuccess.text("You're Signed In As: " + localStorage.getItem("LoggedAuthorName"));
+        $("#createPage").append(loginSuccess);
+      } else {
+        $("#loginName").addClass("invalid");
+        $("#loginPassword").addClass("invalid");
+        console.log("login failed");
+      }
+    });
+  });
+
+
+  var AuthorName = localStorage.getItem("LoggedAuthorName");
+
+  if (AuthorName === null) {
+    $(".instructions").hide();
+    $("#createForm").hide();
+    $("#signUpForm").hide();
+    $("#loginForm").hide();
+    $("#submit").hide();
+    $("#loginGetButton").hide();
+    $("#signUpPostButton").hide();
+  }
+
+  if (AuthorName != null) {
+    $("#loginForm").hide();
+    $("#signUpForm").hide();
+    $("#loginGetButton").hide();
+    $("#signUpPostButton").hide()
+    $("#login-button").hide();
+    $("#signup-button").hide();
+  }
+});
+
