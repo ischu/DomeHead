@@ -15,7 +15,7 @@ var AUTHOR = {
   getExamples: function () {
     return $.ajax({
       url: "api/authors",
-      type: GET
+      type: "GET"
     });
   },
   // method attempts to GETs name to check if username is in use
@@ -23,7 +23,7 @@ var AUTHOR = {
   getName: function (nameToCheck) {
     return $.ajax({
       url: "api/authors/" + nameToCheck,
-      type: GET
+      type: "GET"
     });
   },
   // method runs GET on username/password cobination
@@ -131,79 +131,82 @@ $(document).ready(function () {
       name: $("#newName").val().trim(),
       password: $("#newPassword").val().trim()
     };
-    AUTHOR.saveExample(newAuthor).then(function ()
-    // gets newly created object so id can be stored locally
-    {
-      AUTHOR.getLogin(newAuthor.name, newAuthor.password).then(function (res) {
-        localStorage.setItem("LoggedAuthorId", res.id);
-        localStorage.setItem("LoggedAuthorName", res.name);
-        var loginSuccess = $("<p>");
-        loginSuccess.attr("id", "SuccessText");
-        loginSuccess.text("You're Signed In As: " + localStorage.getItem("LoggedAuthorName"));
-        $("#createPage").append(loginSuccess);
-      });
-    }
-    );
-    
-    
-    $("#signUpForm").hide();
-    $("#signUpPostButton").hide();
-    $("#createForm").show();
-    $("#submit").show();
-    $(".instructions").show();
-    console.log("new author created");
-  });
-  // LOGIN BUTTON
-  // gets existing author id, stores it locally
-  $("#loginGetButton").on("click", function () {
-    let loginData = {
-      name: $("#loginName").val().trim(),
-      password: $("#loginPassword").val().trim()
+    // checks if username is already in use
+    AUTHOR.getName(newAuthor.name).then(function (res) {
+      if (res) {
+      $("#newName").addClass("invalid");
+      setHelperText("#nameHelper", "Sorry, this author name is already taken!");
+      } 
+      else {
+        AUTHOR.saveExample(newAuthor).then(function ()
+        // gets newly created object so id can be stored locally
+        {
+          AUTHOR.getLogin(newAuthor.name, newAuthor.password).then(function (res) {
+            localStorage.setItem("LoggedAuthorId", res.id);
+            localStorage.setItem("LoggedAuthorName", res.name);
+            var loginSuccess = $("<p>");
+            loginSuccess.attr("id", "SuccessText");
+            loginSuccess.text("You're Signed In as: " + localStorage.getItem("LoggedAuthorName"));
+            $("#createPage").append(loginSuccess);
+          });
+        });
+      $("#signUpForm").hide();
+      $("#signUpPostButton").hide();
+      $("#createForm").show();
+      $("#submit").show();
+      $(".instructions").show();
+      console.log("new author created");
     };
-    AUTHOR.getLogin(loginData.name, loginData.password).then(function (res) {
-      if (loginData.name === res.name && loginData.password === res.password) {
-        console.log("login successful");
-        localStorage.setItem("LoggedAuthorId", res.id);
-        localStorage.setItem("LoggedAuthorName", res.name)
-        $("#createForm").show();
-        $("#submit").show();
-        $("#loginGetButton").hide();
-        $("#loginForm").hide();
-        $(".instructions").show();
-        var loginSuccess = $("<p>");
-        loginSuccess.attr("id", "SuccessText");
-        loginSuccess.text("You're Signed In As: " + localStorage.getItem("LoggedAuthorName"));
-        $("#createPage").append(loginSuccess);
-      } else {
-        $("#loginName").addClass("invalid");
-        $("#loginPassword").addClass("invalid");
-        console.log("login failed");
-      }
     });
   });
+    // LOGIN BUTTON
+    // gets existing author id, stores it locally
+    $("#loginGetButton").on("click", function () {
+      let loginData = {
+        name: $("#loginName").val().trim(),
+        password: $("#loginPassword").val().trim()
+      };
+      AUTHOR.getLogin(loginData.name, loginData.password).then(function (res) {
+        if (loginData.name === res.name && loginData.password === res.password) {
+          console.log("login successful");
+          localStorage.setItem("LoggedAuthorId", res.id);
+          localStorage.setItem("LoggedAuthorName", res.name)
+          $("#createForm").show();
+          $("#submit").show();
+          $("#loginGetButton").hide();
+          $("#loginForm").hide();
+          $(".instructions").show();
+          var loginSuccess = $("<p>");
+          loginSuccess.attr("id", "SuccessText");
+          loginSuccess.text("You're Signed In As: " + localStorage.getItem("LoggedAuthorName"));
+          $("#createPage").append(loginSuccess);
+        } else {
+          $("#loginName").addClass("invalid");
+          $("#loginPassword").addClass("invalid");
+          console.log("login failed");
+        }
+      });
+    });
 
 
-  var AuthorName = localStorage.getItem("LoggedAuthorName");
+    var AuthorName = localStorage.getItem("LoggedAuthorName");
 
-  if (AuthorName === null) {
-    $(".instructions").hide();
-    $("#createForm").hide();
-    $("#signUpForm").hide();
-    $("#loginForm").hide();
-    $("#submit").hide();
-    $("#loginGetButton").hide();
-    $("#signUpPostButton").hide();
-  }
+    if (AuthorName === null) {
+      $(".instructions").hide();
+      $("#createForm").hide();
+      $("#signUpForm").hide();
+      $("#loginForm").hide();
+      $("#submit").hide();
+      $("#loginGetButton").hide();
+      $("#signUpPostButton").hide();
+    }
 
-  if (AuthorName != null) {
-    $("#loginForm").hide();
-    $("#signUpForm").hide();
-    $("#loginGetButton").hide();
-    $("#signUpPostButton").hide()
-    $("#login-button").hide();
-    $("#signup-button").hide();
-  }
-});
-
-
-
+    if (AuthorName != null) {
+      $("#loginForm").hide();
+      $("#signUpForm").hide();
+      $("#loginGetButton").hide();
+      $("#signUpPostButton").hide()
+      $("#login-button").hide();
+      $("#signup-button").hide();
+    }
+  });
