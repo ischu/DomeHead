@@ -53,7 +53,6 @@ const validate = {
     // If text is incorrect length, it will not submit
 
     if (textVal === "") {
-      setHelperText("#textHelper", "Story cannot be blank");
       $("#text").addClass("invalid");
     } else if (textVal.length >= 5000) {
       setHelperText("#textHelper", "Story cannot be longer than 5000 characters");
