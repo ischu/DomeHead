@@ -33,18 +33,18 @@ const validate = {
   },
 
   // GENRE VALIDATION
-  genre: () => {
-    let genreVal= $("#genre").val();
-    console.log(genreVal);
-    // Cannot be blank
-    if (genreVal === "Genre") {
-      $("#genre").addClass("invalid");
-      console.log("invalid");
-    } else {
-      $("#genre").removeClass("invalid");
-      $("#genre").addClass("valid");
-    }
-  },
+  // genre: () => {
+  //   let genreVal= $("#genre").val();
+  //   console.log(genreVal);
+  //   // Cannot be blank
+  //   if (genreVal === "Genre") {
+  //     $("#genre").addClass("invalid");
+  //     console.log("invalid");
+  //   } else {
+  //     $("#genre").removeClass("invalid");
+  //     $("#genre").addClass("valid");
+  //   }
+  // },
 
   // STORY VALIDATION
   text: () => {
@@ -66,7 +66,6 @@ const validate = {
       setHelperText("#textHelper", "Story Submitted!");
       $("#text").removeClass("invalid");
       $("#text").addClass("valid");
-      $("#text").val("");
     }
   },
   // AUTHOR VALIDATION
