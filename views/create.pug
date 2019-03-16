@@ -6,20 +6,22 @@ block create
             form.col.s6#loginForm
                     h6 Author Login
                     .input-field.col.s6
-                        input#loginName.validate(placeholder='Name', type='text')
+                        input#loginName.validate(placeholder='Name', type='text', required, aria-required="true")
                         label(for='login_name') Name
+                        span#loginHelper.helper-text(data-error="Username or password is incorrect")
                     .input-field.col.s6
-                        input#loginPassword.validate(placeholder="Password", type='text')
+                        input#loginPassword.validate(placeholder="Password", type='text', required, aria-required="true")
                         label(for='password') Password
             form.col.s6#signUpForm
                     h6 New Authors
                     .input-field.col.s6
-                        input#newName.validate(placeholder="Name" type='text')
+                        input#newName.validate(placeholder="Name", type='text', minlength="3", maxlength="20", required, aria-required="true")
                         label(for='new_name') Name
-                        span#nameHelper.helper-text(data-error="author name must be between 3 and 20 characters")
+                        span#nameHelper.helper-text(data-error="Author name must be between 3 and 20 characters")
                     .input-field.col.s6
-                        input#newPassword.validate(placeholder="Password" type='text')
+                        input#newPassword.validate(placeholder="Password", type='text', minlength="3", maxlength="20", required, aria-required="true")
                         label(for='password') Password
+                        span#passHelper.helper-text(data-error="Password must be between 3 and 20 characters")
                         
         .row(id="accountButtons")
             div.col.s6
@@ -38,7 +40,7 @@ block create
                 #titleGenreDiv
                     .row#titleGenreRow
                         .input-field.col.m6.s5
-                            input#title.validate(placeholder="Title", type='text', minlength="5", maxlength="40", required, aria-required="true")
+                            input#title.validate(placeholder="Title", type='text', minlength="5", maxlength="40", required, aria-required="true", autocomplete="off")
                             label(for='title') Story Title
                             span#titleHelper.helper-text(data-error="Every story needs a title")
 
@@ -60,7 +62,7 @@ block create
                             .input-field.col.s12
                                 textarea#text.materialize-textarea.validate(placeholder="Text" data-length="5000", maxlength="5000", required, aria-required="true")
                                 label(for='textarea1') Your Story Here
-                                span#textHelper.helper-text(data-error="Your story can't be blank", data-success="Story Submitted!")
+                                span#textHelper.helper-text(data-error="", data-success="Story Submitted!")
 
 
 

@@ -49,11 +49,10 @@ const validate = {
   // STORY VALIDATION
   text: () => {
     let textVal= $("#text").val().trim();
-    let bracketsRegEx = /\[(\w+)\]/gi;
+    let bracketsRegEx = /\[([\w+ ]+)\]/gi;
     // If text is incorrect length, it will not submit
 
     if (textVal === "") {
-      setHelperText("#textHelper", "Story cannot be blank");
       $("#text").addClass("invalid");
     } else if (textVal.length >= 5000) {
       setHelperText("#textHelper", "Story cannot be longer than 5000 characters");
@@ -78,14 +77,14 @@ const validate = {
     let NonWordRegEx= /\W/g;
 
     if (authorVal === "") {
-      setHelperText("#nameHelper", "Author cannot be blank");
+      setHelperText("#nameHelper", "name cannot be blank");
     } // next two check for valid length
     else if (authorVal.length < 3) {
       $("#newName").addClass("invalid");
       setHelperText("#nameHelper", "Name must be at least 3 characters long");
     } else if (authorVal.length >= 20) {
       $("#newName").addClass("invalid");
-      setHelperText("#nameHelper", "Title cannot be longer than 20 characters");
+      setHelperText("#nameHelper", "Name cannot be longer than 20 characters");
     }
     // checks for invalid characters
     else if (NonWordRegEx.test(authorVal)) {
@@ -95,6 +94,22 @@ const validate = {
       $("#newName").removeClass("invalid");
       $("#newName").addClass("valid");
     }
+  },
+  password: () => {
+    //If author is incorrect length or has invalid characters, it will not submit
+
+    let passVal= $("#newPassword").val().trim();
+
+    if (passVal === "") {
+      setHelperText("#passHelper", "name cannot be blank");
+    } // next two check for valid length
+    else if (passVal.length < 3) {
+      $("#newPassword").addClass("invalid");
+      setHelperText("#passHelper", "Name must be at least 3 characters long");
+    } else if (passVal.length >= 20) {
+      $("#newPassword").addClass("invalid");
+      setHelperText("#passHelper", "Name cannot be longer than 20 characters");
+    }
   }
 };
 
@@ -103,5 +118,6 @@ $(document).ready(function () {
   $("#submit").on("click", validate.title);
   $("#submit").on("click", validate.text);
   $("#submit").on("click", validate.genre);
-  $("#signUpPostButton").on("click", validate.author);
+  $("document").on("click", validate.author);
+  // login validation is in index.js
 });

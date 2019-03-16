@@ -104,4 +104,15 @@ module.exports = function(app) {
         console.log(err);
       });
   });
+
+  app.delete("/api/authors/:id", function(req, res) {
+    db.Author.destroy({
+      where: {
+        id: req.params.id
+      }
+    }).then(function(dbAuthor) {
+      console.log("Story with id " + req.params.id + " destroyed");
+      res.json(dbAuthor);
+    });
+  });
 };
