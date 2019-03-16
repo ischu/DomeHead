@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
         msg: "Sorry, this author name is taken"
       },
       validate: {
-        // author names must be between 4 and
+        // author names must be between 3 and 20
         len: [3, 20],
         // author names can include alphanumeric or underscore only
         is: /^[\w]+$/
@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
       allowNull: false,
       validate: {
         // Length between 7 and 20
-        len: [7-20]
+        len: [3, 20]
       }
     }
   });

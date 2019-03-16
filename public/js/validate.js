@@ -78,7 +78,7 @@ const validate = {
     let NonWordRegEx= /\W/g;
 
     if (authorVal === "") {
-      setHelperText("#nameHelper", "Author cannot be blank");
+      setHelperText("#nameHelper", "name cannot be blank");
     } // next two check for valid length
     else if (authorVal.length < 3) {
       $("#newName").addClass("invalid");
@@ -95,6 +95,22 @@ const validate = {
       $("#newName").removeClass("invalid");
       $("#newName").addClass("valid");
     }
+  },
+  password: () => {
+    //If author is incorrect length or has invalid characters, it will not submit
+
+    let passVal= $("#newPassword").val().trim();
+
+    if (passVal === "") {
+      setHelperText("#passHelper", "name cannot be blank");
+    } // next two check for valid length
+    else if (passVal.length < 3) {
+      $("#newPassword").addClass("invalid");
+      setHelperText("#passHelper", "Name must be at least 3 characters long");
+    } else if (passVal.length >= 20) {
+      $("#newPassword").addClass("invalid");
+      setHelperText("#passHelper", "Name cannot be longer than 20 characters");
+    }
   }
 };
 
@@ -103,5 +119,6 @@ $(document).ready(function () {
   $("#submit").on("click", validate.title);
   $("#submit").on("click", validate.text);
   $("#submit").on("click", validate.genre);
-  $("#signUpPostButton").on("click", validate.author);
+  $("document").on("click", validate.author);
+  // login validation is in index.js
 });

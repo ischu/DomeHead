@@ -8,18 +8,20 @@ block create
                     .input-field.col.s6
                         input#loginName.validate(placeholder='Name', type='text')
                         label(for='login_name') Name
+                        span#loginHelper.helper-text(data-error="Username or password is incorrect")
                     .input-field.col.s6
                         input#loginPassword.validate(placeholder="Password", type='text')
                         label(for='password') Password
             form.col.s6#signUpForm
                     h6 New Authors
                     .input-field.col.s6
-                        input#newName.validate(placeholder="Name" type='text')
+                        input#newName.validate(placeholder="Name", type='text', minlength="3", maxlength="20", required, aria-required="true")
                         label(for='new_name') Name
-                        span#nameHelper.helper-text(data-error="author name must be between 3 and 20 characters")
+                        span#nameHelper.helper-text(data-error="Author name must be between 3 and 20 characters")
                     .input-field.col.s6
-                        input#newPassword.validate(placeholder="Password" type='text')
+                        input#newPassword.validate(placeholder="Password", type='text', minlength="3", maxlength="20", required, aria-required="true")
                         label(for='password') Password
+                        span#passHelper.helper-text(data-error="Password must be between 3 and 20 characters")
                         
         .row(id="accountButtons")
             div.col.s6
