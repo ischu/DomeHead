@@ -137,9 +137,15 @@ $(document).ready(function () {
       AUTHOR.getLogin(newAuthor.name, newAuthor.password).then(function (res) {
         localStorage.setItem("LoggedAuthorId", res.id);
         localStorage.setItem("LoggedAuthorName", res.name);
-      })
+        var loginSuccess = $("<p>");
+        loginSuccess.attr("id", "SuccessText");
+        loginSuccess.text("You're Signed In As: " + localStorage.getItem("LoggedAuthorName"));
+        $("#createPage").append(loginSuccess);
+      });
     }
     );
+    
+    
     $("#signUpForm").hide();
     $("#signUpPostButton").hide();
     $("#createForm").show();
@@ -165,7 +171,8 @@ $(document).ready(function () {
         $("#loginForm").hide();
         $(".instructions").show();
         var loginSuccess = $("<p>");
-        loginSuccess.text("You're Signed In As " + localStorage.getItem("LoggedAuthorName"));
+        loginSuccess.attr("id", "SuccessText");
+        loginSuccess.text("You're Signed In As: " + localStorage.getItem("LoggedAuthorName"));
         $("#createPage").append(loginSuccess);
       } else {
         console.log("login failed");
