@@ -158,6 +158,10 @@ $(document).ready(function () {
     $(".instructions").show();
     $("#submit").show();
     console.log("new author created");
+
+    $("#signUpForm").hide();
+    $("#signUpPostButton").hide();
+    
   });
   // LOGIN BUTTON
   // gets existing author id, stores it locally

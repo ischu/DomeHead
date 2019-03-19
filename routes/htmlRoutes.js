@@ -17,8 +17,6 @@ module.exports = function(app) {
       db.Story.findAll({
         include: [db.Author]
       }).then(function(dbExample) {
-        console.log(dbExample[0
-        ].Author.name);
         res.render("stories", {
          stories: dbExample         
         });
