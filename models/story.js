@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     genre: {
       type: DataTypes.STRING,
-      allowNull: true,
+      allowNull: false,
       validate: {
         // genre will be chosen from a drop-down, so this is more to catch errors
         len: [1, 25],

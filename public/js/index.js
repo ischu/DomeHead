@@ -68,12 +68,12 @@ var storySubmit = function (event) {
   let storedId = localStorage.getItem("LoggedAuthorId");
   let titleVal = $("#title").val().trim();
   let textVal = $("#text").val().trim();
-  // let genreVal = $("#genre").val();
+  let genreVal = $("#genre").val();
   // JSON obj to be submitted
   let example = {
     title: titleVal,
     body: textVal,
-    // genre: "Drama",
+    genre: genreVal,
     AuthorId: storedId
   };
 
@@ -109,12 +109,12 @@ var searchSubmit = function () {
 
       var cardSearchAction = $("<div>");
       cardSearchAction.addClass("card-action");
-      // var cardSearchGenre = $("<a>");
-      // cardSearchGenre.text(res[i].genre);
+      var cardSearchGenre = $("<a>");
+      cardSearchGenre.text(res[i].genre);
       var cardSearchAuthor = $("<a>");
       cardSearchAuthor.text(res[i].Author.name);
       cardSearchAction.append(
-        // cardSearchGenre, 
+        cardSearchGenre, 
         cardSearchAuthor);
 
       cardForSearch.append(cardSearchContent);
@@ -128,7 +128,9 @@ var searchSubmit = function () {
 
 // button functions
 $(document).ready(function () {
+  $(".sidenav").sidenav()
   $("#submit").on("click", storySubmit);
+  $("select").formSelect();
 
 $("#search").on("keypress", function (event) {
   // Number 13 is the "Enter" key on the keyboard
